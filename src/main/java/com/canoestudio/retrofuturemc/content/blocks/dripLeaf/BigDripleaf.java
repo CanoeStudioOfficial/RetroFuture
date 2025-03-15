@@ -1,6 +1,5 @@
 package com.canoestudio.retrofuturemc.content.blocks.dripLeaf;
 
-import com.canoestudio.retrofuturemc.RetroFuturemc;
 import com.canoestudio.retrofuturemc.Utils.IHasModel;
 import com.canoestudio.retrofuturemc.Utils.Sound.ModSoundHandler;
 import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
@@ -13,10 +12,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,6 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.Random;
+
+import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
 public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
 
@@ -49,7 +47,7 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
 
         setTranslationKey("big_dripleaf");
         setRegistryName("big_dripleaf");
-
+        setCreativeTab(CREATIVE_TABS);
         setHardness(0.1F);
         setResistance(0.1F);
         setHarvestLevel("axe", 0);
@@ -65,9 +63,6 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
 
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH).withProperty(TILT, EnumTilt.NONE));
     }
-
-    @Override
-    public void registerModels() { RetroFuturemc.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory"); }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { return FULL_BLOCK_AABB; }
 
@@ -218,7 +213,7 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
     public IBlockState getStateFromMeta(int meta)
     {
         int i = meta / 4;
-        IBlockState state = this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(i));
+        IBlockState state = this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(i));
 
         int j = meta % 4;
 
@@ -250,6 +245,11 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
             worldIn.setBlockState(pos, ModBlocks.DRIPLEAF_STEM.getDefaultState().withProperty(FACING, facing), 2);
             worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(FACING, facing), 3);
         }
+    }
+
+    @Override
+    public void registerModels() {
+
     }
 
     public static enum EnumTilt implements IStringSerializable

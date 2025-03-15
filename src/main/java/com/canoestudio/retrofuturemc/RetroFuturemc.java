@@ -1,7 +1,6 @@
 package com.canoestudio.retrofuturemc;
 
 import com.canoestudio.retrofuturemc.proxy.CommonProxy;
-import com.canoestudio.retrofuturemc.proxy.ProxyBase;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,12 +14,8 @@ import org.apache.logging.log4j.Logger;
 public class RetroFuturemc {
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 
-
-
-
     @SidedProxy(clientSide = "com.canoestudio.retrofuturemc.proxy.ClientProxy", serverSide = "com.canoestudio.retrofuturemc.proxy.CommonProxy")
     public static CommonProxy proxy;
-    public static ProxyBase proxy;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) { proxy.preInit(event); }
