@@ -1,8 +1,8 @@
 {
     "parent": "block/block",
     "textures": {
-        "stem": "fd:blocks/small_dripleaf_stem_bottom",
-        "particle": "fd:blocks/big_dripleaf_stem"
+        "stem": "retrofuturemc:blocks/small_dripleaf_stem_bottom",
+        "particle": "retrofuturemc:blocks/big_dripleaf_stem"
     },
     "elements": [
         {   "from": [ 4.5, 0, 8 ],

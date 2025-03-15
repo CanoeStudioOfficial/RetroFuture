@@ -1,11 +1,11 @@
 {
     "parent": "block/block",
     "textures": {
-        "top": "fd:blocks/big_dripleaf_top",
-        "stem": "fd:blocks/big_dripleaf_stem",
-        "side": "fd:blocks/big_dripleaf_side",
-        "tip": "fd:blocks/big_dripleaf_tip",
-        "particle": "fd:blocks/big_dripleaf_top"
+        "top": "retrofuturemc:blocks/big_dripleaf_top",
+        "stem": "retrofuturemc:blocks/big_dripleaf_stem",
+        "side": "retrofuturemc:blocks/big_dripleaf_side",
+        "tip": "retrofuturemc:blocks/big_dripleaf_tip",
+        "particle": "retrofuturemc:blocks/big_dripleaf_top"
     },
     "elements": [
         {   "from": [ 0, 15, 0 ],

@@ -1,10 +1,10 @@
 {
     "parent": "block/block",
     "textures": {
-        "top": "fd:blocks/small_dripleaf_top",
-        "side": "fd:blocks/small_dripleaf_side",
-        "stem": "fd:blocks/small_dripleaf_stem_top",
-        "particle": "fd:blocks/small_dripleaf_top"
+        "top": "retrofuturemc:blocks/small_dripleaf_top",
+        "side": "retrofuturemc:blocks/small_dripleaf_side",
+        "stem": "retrofuturemc:blocks/small_dripleaf_stem_top",
+        "particle": "retrofuturemc:blocks/small_dripleaf_top"
     },
     "elements": [
         {   "from": [ 8, 2.99, 8 ],
