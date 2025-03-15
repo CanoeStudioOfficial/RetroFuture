@@ -1,6 +1,6 @@
 package com.canoestudio.retrofuturemc.content;
 
-import com.canoestudio.retrofuturemc.content.items.Items;
+import com.canoestudio.retrofuturemc.content.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.item.ItemFood;
 
@@ -16,6 +16,6 @@ public class FoodCreator extends ItemFood
         setNoRepair();
         setCreativeTab(CREATIVE_TABS);
 
-        Items.ITEMS.add(this);
+        ModItems.ITEMS.add(this);
     }
 }

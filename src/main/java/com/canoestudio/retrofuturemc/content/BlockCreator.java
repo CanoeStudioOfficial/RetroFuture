@@ -1,6 +1,6 @@
 package com.canoestudio.retrofuturemc.content;
 
-import com.canoestudio.retrofuturemc.content.blocks.Blocks;
+import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -23,8 +23,8 @@ public class BlockCreator extends Block {
         setSoundType(SoundType.STONE);
         setCreativeTab(CREATIVE_TABS);
 
-        Blocks.BLOCKS.add(this);
-        Blocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
+        ModBlocks.BLOCKS.add(this);
+        ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
     }
 
     @Override

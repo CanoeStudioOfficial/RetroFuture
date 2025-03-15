@@ -1,7 +1,7 @@
 package com.canoestudio.retrofuturemc.registry;
 
-import com.canoestudio.retrofuturemc.content.blocks.Blocks;
-import com.canoestudio.retrofuturemc.content.items.Items;
+import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.content.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -15,21 +15,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 
-import static com.canoestudio.retrofuturemc.content.blocks.Blocks.BLOCKITEMS;
+import static com.canoestudio.retrofuturemc.content.blocks.ModBlocks.BLOCKITEMS;
 import static com.canoestudio.retrofuturemc.retrofuturemc.Tags.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class ContentRegister {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        for (Block block : Blocks.BLOCKS) {
+        for (Block block : ModBlocks.BLOCKS) {
             event.getRegistry().register(block);
         }
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        for (Item item : Items.ITEMS) {
+        for (Item item : ModItems.ITEMS) {
             event.getRegistry().register(item);
         }
         for (Item blockitem : BLOCKITEMS) {
@@ -39,7 +39,7 @@ public class ContentRegister {
 
     @SideOnly(Side.CLIENT)
     public static void registerModels() {
-        for (Item item : Items.ITEMS) {
+        for (Item item : ModItems.ITEMS) {
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
         }
         for (Item blockitem : BLOCKITEMS) {
