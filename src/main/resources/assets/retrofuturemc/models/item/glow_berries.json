@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "retrofuturmc:items/glow_berries"
+    "layer0": "retrofuturemc:items/glow_berries"
   }
 }

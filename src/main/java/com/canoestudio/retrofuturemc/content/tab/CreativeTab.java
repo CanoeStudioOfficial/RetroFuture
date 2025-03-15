@@ -1,7 +1,7 @@
-package com.canoestudio.retrofuturmc.content.tab;
+package com.canoestudio.retrofuturemc.content.tab;
 
-import com.canoestudio.retrofuturmc.retrofuturmc.Tags;
-import com.canoestudio.retrofuturmc.content.items.Items;
+import com.canoestudio.retrofuturemc.content.items.Items;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 

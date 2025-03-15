@@ -1,10 +1,10 @@
-package com.canoestudio.retrofuturmc.content;
+package com.canoestudio.retrofuturemc.content;
 
-import com.canoestudio.retrofuturmc.retrofuturmc.Tags;
-import com.canoestudio.retrofuturmc.content.items.Items;
+import com.canoestudio.retrofuturemc.content.items.Items;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.item.ItemFood;
 
-import static com.canoestudio.retrofuturmc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
 public class FoodCreator extends ItemFood
 {

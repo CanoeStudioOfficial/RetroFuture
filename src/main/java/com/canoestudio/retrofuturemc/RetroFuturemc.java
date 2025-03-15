@@ -1,7 +1,7 @@
-package com.canoestudio.retrofuturmc;
+package com.canoestudio.retrofuturemc;
 
-import com.canoestudio.retrofuturmc.retrofuturmc.Tags;
-import com.canoestudio.retrofuturmc.proxy.CommonProxy;
+import com.canoestudio.retrofuturemc.proxy.CommonProxy;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -11,10 +11,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
-public class RetroFuturmc {
+public class RetroFuturemc {
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 
-    @SidedProxy(clientSide = "com.canoestudio.retrofuturmc.proxy.ClientProxy", serverSide = "com.canoestudio.retrofuturmc.proxy.CommonProxy")
+    @SidedProxy(clientSide = "com.canoestudio.retrofuturemc.proxy.ClientProxy", serverSide = "com.canoestudio.retrofuturemc.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler

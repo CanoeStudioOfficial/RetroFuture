@@ -1,4 +1,4 @@
-package com.canoestudio.retrofuturmc.proxy;
+package com.canoestudio.retrofuturemc.proxy;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

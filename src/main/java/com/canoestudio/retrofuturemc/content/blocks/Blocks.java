@@ -1,6 +1,6 @@
-package com.canoestudio.retrofuturmc.content.blocks;
+package com.canoestudio.retrofuturemc.content.blocks;
 
-import com.canoestudio.retrofuturmc.content.BlockCreator;
+import com.canoestudio.retrofuturemc.content.BlockCreator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

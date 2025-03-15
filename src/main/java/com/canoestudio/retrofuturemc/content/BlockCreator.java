@@ -1,7 +1,7 @@
-package com.canoestudio.retrofuturmc.content;
+package com.canoestudio.retrofuturemc.content;
 
-import com.canoestudio.retrofuturmc.retrofuturmc.Tags;
-import com.canoestudio.retrofuturmc.content.blocks.Blocks;
+import com.canoestudio.retrofuturemc.content.blocks.Blocks;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,7 +11,7 @@ import net.minecraft.item.ItemBlock;
 
 import java.util.Random;
 
-import static com.canoestudio.retrofuturmc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
 public class BlockCreator extends Block {
     public BlockCreator(String name, int hardness, int harvestlevel, String toolclass) {
