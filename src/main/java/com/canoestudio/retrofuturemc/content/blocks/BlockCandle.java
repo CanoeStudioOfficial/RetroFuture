@@ -78,6 +78,23 @@ public class BlockCandle extends BlockCreator {
     }
 
     @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        IBlockState state = world.getBlockState(pos.down());
+        return checkSpecialPlacementBlock(state, world, pos);
+    }
+
+    private boolean checkSpecialPlacementBlock(IBlockState state, World world, BlockPos pos) {
+        if (state.getBlock() instanceof BlockShulkerBox) return true;
+        if (state.getBlock() instanceof BlockAnvil) return true;
+        if (state.getBlock() instanceof BlockHopper) return false;
+        if (state.getBlock() instanceof BlockLeaves) return false;
+        if (state.getBlock().canPlaceTorchOnTop(state, world, pos)) return true;
+        if (state.getBlock() instanceof BlockEndRod && state.getValue(BlockEndRod.FACING) == EnumFacing.UP) return true;
+        BlockFaceShape shape = state.getBlockFaceShape(world, pos, EnumFacing.UP);
+        return shape != BlockFaceShape.BOWL && shape != BlockFaceShape.UNDEFINED;
+    }
+
+    @Override
     public void onEntityWalk(World world, BlockPos pos, Entity entity) {
         if (entity.isBurning()) light(world, world.getBlockState(pos), pos);
         super.onEntityWalk(world, pos, entity);
@@ -112,6 +129,11 @@ public class BlockCandle extends BlockCreator {
         return AABBS[state.getValue(CANDLES) - 1];
     }
 
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing facing) {
+        return BlockFaceShape.UNDEFINED;
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
@@ -131,5 +153,25 @@ public class BlockCandle extends BlockCreator {
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        drops.add(new ItemStack(state.getBlock(), state.getValue(CANDLES)));
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        return new ItemStack(state.getBlock());
     }
 }
