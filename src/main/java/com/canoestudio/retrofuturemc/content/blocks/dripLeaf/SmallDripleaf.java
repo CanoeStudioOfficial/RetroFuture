@@ -29,6 +29,8 @@ import net.minecraftforge.common.IShearable;
 
 import java.util.Random;
 
+import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+
 public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, IHasModel {
 
     public static final PropertyEnum<BlockDoublePlant.EnumBlockHalf> HALF = BlockDoublePlant.HALF;
@@ -42,17 +44,19 @@ public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, I
 
         setTranslationKey("small_dripleaf");
         setRegistryName("small_dripleaf");
-
+        setCreativeTab(CREATIVE_TABS);
         setSoundType(BigDripleaf.DRIPLEAF);
+
+        this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER).withProperty(FACING, EnumFacing.SOUTH));
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-
-        this.setDefaultState(this.blockState.getBaseState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER).withProperty(FACING, EnumFacing.SOUTH));
     }
 
     @Override
-    public void registerModels() { MoMoFramework.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory"); }
+    public void registerModels() {
+
+    }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { return FULL_BLOCK_AABB; }
 
@@ -207,10 +211,10 @@ public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, I
     {
         if(meta > 3)
         {
-            return this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER).withProperty(FACING, EnumFacing.getHorizontal(meta));
+            return this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER).withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
         }
         else {
-            return this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER).withProperty(FACING, EnumFacing.getHorizontal(meta));
+            return this.getDefaultState().withProperty(HALF, BlockDoublePlant.EnumBlockHalf.LOWER).withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
         }
     }
 

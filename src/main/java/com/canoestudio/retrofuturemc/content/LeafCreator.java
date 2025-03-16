@@ -1,0 +1,86 @@
+package com.canoestudio.retrofuturemc.content;
+
+import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+
+import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+
+public class LeafCreator extends BlockLeaves {
+    public LeafCreator(String name) {
+        super();
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
+        setRegistryName(name.toLowerCase());
+        setCreativeTab(CREATIVE_TABS);
+
+        this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+
+        ModBlocks.BLOCKS.add(this);
+        ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public BlockRenderLayer getRenderLayer()
+    {
+        return Blocks.LEAVES.getRenderLayer();
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return Blocks.LEAVES.isOpaqueCube(state);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+    {
+        return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
+    }
+
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
+    }
+
+    public int getMetaFromState(IBlockState state)
+    {
+        int i;
+
+        if(state.getValue(DECAYABLE))
+            i = state.getValue(CHECK_DECAY)? 3 : 2;
+        else
+            i = state.getValue(CHECK_DECAY)? 1 : 0;
+
+        return i;
+    }
+
+
+    @Override
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return BlockPlanks.EnumType.OAK;
+    }
+
+    @Nonnull
+    @Override
+    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return NonNullList.withSize(1, new ItemStack(this));
+    }
+}

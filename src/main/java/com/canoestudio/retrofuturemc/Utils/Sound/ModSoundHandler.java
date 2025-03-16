@@ -110,9 +110,7 @@ public class ModSoundHandler {
 
     public static void soundRegister()
     {
-        RetroFuturemc.Log("Registering %s sounds.", SOUNDS.size());
         ForgeRegistries.SOUND_EVENTS.registerAll(ModSoundHandler.SOUNDS.toArray(new SoundEvent[0]));
-        RetroFuturemc.Log("Registered %s sounds.", SOUNDS.size());
     }
 
 }
