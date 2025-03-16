@@ -45,7 +45,6 @@ public class DripleafStem extends BlockBush implements IHasModel, IGrowable
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
 
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
