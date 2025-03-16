@@ -1,6 +1,6 @@
-package com.canoestudio.retrofuturemc.content.blocks.CaveVine;
+package com.canoestudio.retrofuturemc.contents.blocks.CaveVine;
 
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;

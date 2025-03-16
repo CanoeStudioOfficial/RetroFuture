@@ -1,6 +1,6 @@
-package com.canoestudio.retrofuturemc.content.items;
+package com.canoestudio.retrofuturemc.contents.items;
 
-import com.canoestudio.retrofuturemc.content.BerryCreator;
+import com.canoestudio.retrofuturemc.contents.BerryCreator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 

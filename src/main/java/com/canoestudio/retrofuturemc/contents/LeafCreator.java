@@ -1,7 +1,7 @@
-package com.canoestudio.retrofuturemc.content;
+package com.canoestudio.retrofuturemc.contents;
 
 import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class LeafCreator extends BlockLeaves {
     public static final SoundType AZALEA_LEAVES = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_AZALEA_LEAVES_BREAK, ModSoundHandler.BLOCK_AZALEA_LEAVES_STEP, ModSoundHandler.BLOCK_AZALEA_PLACE, ModSoundHandler.BLOCK_AZALEA_LEAVES_HIT, ModSoundHandler.BLOCK_AZALEA_LEAVES_FALL);

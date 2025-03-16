@@ -1,8 +1,8 @@
-package com.canoestudio.retrofuturemc.content.blocks.dripLeaf;
+package com.canoestudio.retrofuturemc.contents.blocks.dripLeaf;
 
 import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
-import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class BigDripleaf extends BlockBush implements IGrowable {
     public static final String name = "Big_Dripleaf";

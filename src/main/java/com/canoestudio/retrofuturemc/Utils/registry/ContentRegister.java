@@ -1,7 +1,7 @@
-package com.canoestudio.retrofuturemc.Utils.registry;
+package com.canoestudio.retrofuturemc.utils.registry;
 
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
-import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 
-import static com.canoestudio.retrofuturemc.content.blocks.ModBlocks.BLOCKITEMS;
+import static com.canoestudio.retrofuturemc.contents.blocks.ModBlocks.BLOCKITEMS;
 import static com.canoestudio.retrofuturemc.retrofuturemc.Tags.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)

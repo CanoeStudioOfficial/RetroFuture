@@ -1,13 +1,13 @@
-package com.canoestudio.retrofuturemc.content;
+package com.canoestudio.retrofuturemc.contents;
 
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 
-import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class BlockCreator extends Block {
     public BlockCreator(String name, int hardness, int harvestlevel, String toolclass) {

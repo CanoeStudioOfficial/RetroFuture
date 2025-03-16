@@ -1,7 +1,7 @@
-package com.canoestudio.retrofuturemc.content.blocks.dripLeaf;
+package com.canoestudio.retrofuturemc.contents.blocks.dripLeaf;
 
 
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockHorizontal;
@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class DripleafStem extends BlockBush implements IGrowable
 {

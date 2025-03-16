@@ -1,9 +1,9 @@
-package com.canoestudio.retrofuturemc.content.blocks.CaveVine;
+package com.canoestudio.retrofuturemc.contents.blocks.CaveVine;
 
 
 import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
-import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -39,7 +39,7 @@ import org.lwjgl.input.Keyboard;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class CaveVinePlant extends BlockBush implements IGrowable {

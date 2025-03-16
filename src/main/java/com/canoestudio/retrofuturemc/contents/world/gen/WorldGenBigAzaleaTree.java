@@ -1,6 +1,6 @@
-package com.canoestudio.retrofuturemc.World.Tree;
+package com.canoestudio.retrofuturemc.contents.world.gen;
 
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;

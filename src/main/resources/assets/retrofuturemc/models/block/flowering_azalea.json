@@ -1,0 +1,7 @@
+{
+  "parent": "retrofuturemc:block/template_azalea",
+  "textures": {
+    "top": "retrofuturemc:blocks/flowering_azalea_top",
+    "side": "retrofuturemc:blocks/flowering_azalea_side"
+  }
+}

@@ -1,10 +1,10 @@
-package com.canoestudio.retrofuturemc.content;
+package com.canoestudio.retrofuturemc.contents;
 
 import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
-import com.canoestudio.retrofuturemc.content.blocks.CaveVine.CaveVine;
-import com.canoestudio.retrofuturemc.content.blocks.CaveVine.CaveVinePlant;
-import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
-import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVine;
+import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVinePlant;
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
-import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class BerryCreator extends ItemFood implements IPlantable {
     public BerryCreator(String name, int hunger, float saturationModifier)
