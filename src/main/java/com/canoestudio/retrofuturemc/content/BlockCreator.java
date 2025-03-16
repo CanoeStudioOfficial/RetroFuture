@@ -21,13 +21,5 @@ public class BlockCreator extends Block {
 
         ModBlocks.BLOCKS.add(this);
         ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
-<<<<<<< Updated upstream
-    }
-
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(this);
-=======
->>>>>>> Stashed changes
     }
 }

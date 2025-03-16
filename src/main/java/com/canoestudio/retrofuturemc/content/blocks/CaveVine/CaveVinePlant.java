@@ -41,6 +41,8 @@ import org.lwjgl.input.Keyboard;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
+
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class CaveVinePlant extends BlockBush implements IHasModel, IGrowable {
 
@@ -58,12 +60,11 @@ public class CaveVinePlant extends BlockBush implements IHasModel, IGrowable {
 
         setRegistryName(name);
         setTranslationKey(name);
-
-        ModBlocks.BLOCKS.add(this);
-
+        setCreativeTab(CREATIVE_TABS);
         this.setDefaultState(this.getDefaultState().withProperty(BERRIES, false));
 
-        setCreativeTab(CreativeTabs.DECORATIONS);
+        ModBlocks.BLOCKS.add(this);
+        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override
