@@ -1,9 +1,11 @@
 package com.canoestudio.retrofuturemc.content;
 
+import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
 import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -23,11 +25,14 @@ import java.util.List;
 import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
 public class LeafCreator extends BlockLeaves {
+    public static final SoundType AZALEA_LEAVES = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_AZALEA_LEAVES_BREAK, ModSoundHandler.BLOCK_AZALEA_LEAVES_STEP, ModSoundHandler.BLOCK_AZALEA_PLACE, ModSoundHandler.BLOCK_AZALEA_LEAVES_HIT, ModSoundHandler.BLOCK_AZALEA_LEAVES_FALL);
+
     public LeafCreator(String name) {
         super();
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name.toLowerCase());
         setCreativeTab(CREATIVE_TABS);
+        setSoundType(AZALEA_LEAVES);
 
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 

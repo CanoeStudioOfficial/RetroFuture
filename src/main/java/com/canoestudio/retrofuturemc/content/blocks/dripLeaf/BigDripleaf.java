@@ -1,9 +1,9 @@
 package com.canoestudio.retrofuturemc.content.blocks.dripLeaf;
 
-import com.canoestudio.retrofuturemc.Utils.IHasModel;
-import com.canoestudio.retrofuturemc.Utils.Sound.ModSoundHandler;
+import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
 import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -27,8 +27,8 @@ import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
-public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
-
+public class BigDripleaf extends BlockBush implements IGrowable {
+    public static final String name = "Big_Dripleaf";
     public static final SoundType DRIPLEAF = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, ModSoundHandler.BLOCK_BIG_DRIPLEAF_STEP, ModSoundHandler.BLOCK_BIG_DRIPLEAF_PLACE, ModSoundHandler.BLOCK_BIG_DRIPLEAF_HIT, ModSoundHandler.BLOCK_BIG_DRIPLEAF_FALL);
 
     protected static final AxisAlignedBB HALF_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
@@ -45,8 +45,8 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
 
         setHardness(0.0F);
 
-        setTranslationKey("big_dripleaf");
-        setRegistryName("big_dripleaf");
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
+        setRegistryName(name);
         setCreativeTab(CREATIVE_TABS);
         setHardness(0.1F);
         setResistance(0.1F);
@@ -131,7 +131,7 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
         }
     }
 
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         EnumTilt tilt = state.getValue(TILT);
 
@@ -245,11 +245,6 @@ public class BigDripleaf extends BlockBush implements IHasModel, IGrowable {
             worldIn.setBlockState(pos, ModBlocks.DRIPLEAF_STEM.getDefaultState().withProperty(FACING, facing), 2);
             worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(FACING, facing), 3);
         }
-    }
-
-    @Override
-    public void registerModels() {
-
     }
 
     public static enum EnumTilt implements IStringSerializable

@@ -1,8 +1,8 @@
 package com.canoestudio.retrofuturemc.content.blocks.dripLeaf;
 
-import com.canoestudio.retrofuturemc.Utils.IHasModel;
 import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -31,7 +31,8 @@ import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
-public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, IHasModel {
+public class SmallDripleaf extends BlockBush implements IGrowable, IShearable {
+    public static final String name = "Small_Dripleaf";
 
     public static final PropertyEnum<BlockDoublePlant.EnumBlockHalf> HALF = BlockDoublePlant.HALF;
     public static final PropertyEnum<EnumFacing> FACING = BlockHorizontal.FACING;
@@ -42,8 +43,8 @@ public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, I
 
         setHardness(0.0F);
 
-        setTranslationKey("small_dripleaf");
-        setRegistryName("small_dripleaf");
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
+        setRegistryName(name);
         setCreativeTab(CREATIVE_TABS);
         setSoundType(BigDripleaf.DRIPLEAF);
 
@@ -51,11 +52,6 @@ public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, I
 
         ModBlocks.BLOCKS.add(this);
         ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-    }
-
-    @Override
-    public void registerModels() {
-
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { return FULL_BLOCK_AABB; }

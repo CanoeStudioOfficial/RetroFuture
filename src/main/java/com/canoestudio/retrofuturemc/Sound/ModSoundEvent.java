@@ -1,4 +1,4 @@
-package com.canoestudio.retrofuturemc.Utils.Sound;
+package com.canoestudio.retrofuturemc.Sound;
 
 
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;

@@ -1,9 +1,8 @@
 package com.canoestudio.retrofuturemc.content.blocks.dripLeaf;
 
 
-import com.canoestudio.retrofuturemc.Utils.IHasModel;
 import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
-import com.canoestudio.retrofuturemc.content.items.ModItems;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.IGrowable;
@@ -14,7 +13,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
@@ -28,8 +26,9 @@ import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
-public class DripleafStem extends BlockBush implements IHasModel, IGrowable
+public class DripleafStem extends BlockBush implements IGrowable
 {
+    public static final String name = "Big_Dripleaf_Stem";
     public static final PropertyEnum<EnumFacing> FACING = BlockHorizontal.FACING;
 
     public DripleafStem()
@@ -38,17 +37,14 @@ public class DripleafStem extends BlockBush implements IHasModel, IGrowable
 
         setHardness(0.0F);
 
-        setTranslationKey("big_dripleaf_stem");
-        setRegistryName("big_dripleaf_stem");
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
+        setRegistryName(name);
         setCreativeTab(CREATIVE_TABS);
         setSoundType(BigDripleaf.DRIPLEAF);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
 
         ModBlocks.BLOCKS.add(this);
     }
-
-    @Override
-    public void registerModels() {  }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { return FULL_BLOCK_AABB; }
 

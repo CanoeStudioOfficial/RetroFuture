@@ -1,8 +1,7 @@
 package com.canoestudio.retrofuturemc.content.blocks.CaveVine;
 
 
-import com.canoestudio.retrofuturemc.Utils.IHasModel;
-import com.canoestudio.retrofuturemc.Utils.Sound.ModSoundHandler;
+import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
 import com.canoestudio.retrofuturemc.content.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.content.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
@@ -43,7 +42,7 @@ import java.util.Random;
 import static com.canoestudio.retrofuturemc.content.tab.CreativeTab.CREATIVE_TABS;
 
 @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
-public class CaveVinePlant extends BlockBush implements IHasModel, IGrowable {
+public class CaveVinePlant extends BlockBush implements IGrowable {
 
     public static final SoundType CAVE_VINES = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_CAVE_VINES_BREAK, ModSoundHandler.BLOCK_CAVE_VINES_STEP, ModSoundHandler.BLOCK_CAVE_VINES_PLACE, ModSoundHandler.BLOCK_CAVE_VINES_HIT, ModSoundHandler.BLOCK_CAVE_VINES_FALL);
 
@@ -57,18 +56,12 @@ public class CaveVinePlant extends BlockBush implements IHasModel, IGrowable {
 
         this.setSoundType(CAVE_VINES);
 
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name);
-        setTranslationKey(name);
         setCreativeTab(CREATIVE_TABS);
         this.setDefaultState(this.getDefaultState().withProperty(BERRIES, false));
 
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-    }
-
-    @Override
-    public void registerModels() {
-
     }
 
     @Nullable

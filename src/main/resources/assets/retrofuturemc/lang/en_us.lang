@@ -5,5 +5,10 @@ itemGroup.retrofuturemc=Retrofuturemc
 tile.retrofuturemc.deepslate.name=Deepslate
 tile.retrofuturemc.azalea_leaves.name=Azalea Leaves
 tile.retrofuturemc.flowering_azalea_leaves.name=Flowering Azalea Leaves
+tile.retrofuturemc.big_dripleaf.name=Big Dripleaf
+tile.retrofuturemc.big_dripleaf_stem.name=Big Dripleaf Stem
+tile.retrofuturemc.small_dripleaf.name=Small Dripleaf
+tile.retrofuturemc.cave_vines.name=Cave Vine
+tile.retrofuturemc.cave_vines_plant.name=Cave Vine Plant
 
 item.retrofuturemc.glow_berries.name=Glow Berries
