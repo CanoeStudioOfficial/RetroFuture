@@ -4,6 +4,7 @@ import com.canoestudio.retrofuturemc.content.BlockCreator;
 import com.canoestudio.retrofuturemc.content.LeafCreator;
 import com.canoestudio.retrofuturemc.content.blocks.CaveVine.CaveVine;
 import com.canoestudio.retrofuturemc.content.blocks.CaveVine.CaveVinePlant;
+import com.canoestudio.retrofuturemc.content.blocks.Leaves.FloweringAzaleaLeaves;
 import com.canoestudio.retrofuturemc.content.blocks.dripLeaf.BigDripleaf;
 import com.canoestudio.retrofuturemc.content.blocks.dripLeaf.DripleafStem;
 import com.canoestudio.retrofuturemc.content.blocks.dripLeaf.SmallDripleaf;
@@ -28,5 +29,10 @@ public class ModBlocks {
     public static final Block CAVE_VINE = new CaveVine("Cave_Vines");
 
     public static final BlockLeaves Azalea_Leaves = new LeafCreator("Azalea_Leaves");
-    public static final BlockLeaves Flowering_Azalea_Leaves = new LeafCreator("Flowering_Azalea_Leaves");
+    public static final Block ROOTED_DIRT = new RootedDirt();
+    public static final Block HANGING_ROOTS = new HangingRoots();
+    public static final Block GRITTED_DIRT = new GrittedDirt();
+    public static final Block MOSS_BLOCK = new MossBlock();
+    public static final BlockLeaves Flowering_Azalea_Leaves = new FloweringAzaleaLeaves();
+    public static final Block AZALEA = new Azalea();
 }
