@@ -40,8 +40,13 @@ public class LeafCreator extends BlockLeaves {
         ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    public boolean isTranslucent(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public BlockRenderLayer getRenderLayer()
     {
         return Blocks.LEAVES.getRenderLayer();

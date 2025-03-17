@@ -43,26 +43,6 @@ public class AzaleaCreator extends Block implements IGrowable, IPlantable {
         ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockRenderLayer getRenderLayer()
-    {
-        return Blocks.LEAVES.getRenderLayer();
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return Blocks.LEAVES.isOpaqueCube(state);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
-        return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
-    }
-
     /**
      * Checks if this block can be placed exactly at the given position.
      */
@@ -138,13 +118,18 @@ public class AzaleaCreator extends Block implements IGrowable, IPlantable {
         return this.canSustainBush(worldIn.getBlockState(pos.down()));
     }
 
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
+    public BlockRenderLayer getRenderLayer()
     {
         return BlockRenderLayer.CUTOUT;
     }
