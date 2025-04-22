@@ -1,1 +1,2 @@
 FutureDecoration https://github.com/iMoMo-cn/FutureDecoration
+Minecraft-Mod-suikecherry https://github.com/sui-ke/Minecraft-Mod-suikecherry

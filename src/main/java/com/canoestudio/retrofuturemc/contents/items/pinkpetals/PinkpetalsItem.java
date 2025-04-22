@@ -25,8 +25,8 @@ import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TA
 public class PinkpetalsItem extends Item {
 
     public PinkpetalsItem(String name) {
-        setRegistryName(name);
-        setTranslationKey(name + "_" + Tags.MOD_ID);
+        setRegistryName(name.toLowerCase());
+        setTranslationKey(name.toLowerCase() + "_" + Tags.MOD_ID);
         setCreativeTab(CREATIVE_TABS);
 
         ModItems.ITEMS.add(this);

@@ -31,8 +31,8 @@ import java.util.Map;
 //落英类
 public class PinkPetals extends BlockCarpet {
     public PinkPetals(String name) {
-        /*设置物品名*/setRegistryName(name);
-        /*设置物品名key*/setTranslationKey(name + "_" + Tags.MOD_ID);
+        /*设置物品名*/setRegistryName(name.toLowerCase());
+        /*设置物品名key*/setTranslationKey(name.toLowerCase() + "_" + Tags.MOD_ID);
         /*设置硬度*/setHardness(0.0F);
         /*设置抗爆性*/setResistance(0.0F);
         /*设置不透明度*/setLightOpacity(0);
