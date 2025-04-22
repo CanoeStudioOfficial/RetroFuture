@@ -25,12 +25,14 @@ public class MossCarpetCreator extends Block implements IGrowable {
     protected static final AxisAlignedBB CARPET_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
     public MossCarpetCreator(String name) {
-        super(Material.PLANTS);
+        super(Material.CARPET);
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name.toLowerCase());
         setHardness(0.1F);
         setSoundType(SoundType.PLANT);
         setCreativeTab(CREATIVE_TABS);
+
+
 
         ModBlocks.BLOCKS.add(this);
         ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
@@ -92,14 +94,17 @@ public class MossCarpetCreator extends Block implements IGrowable {
         return false;
     }
 
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+
 
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    // 添加获取渲染类型的方法
+    @SideOnly(Side.CLIENT)
+    public boolean isFullCube(IBlockState state) {
+        return false;
     }
 
     @Override
