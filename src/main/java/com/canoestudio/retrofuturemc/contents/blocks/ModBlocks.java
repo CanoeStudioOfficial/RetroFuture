@@ -1,9 +1,7 @@
 package com.canoestudio.retrofuturemc.contents.blocks;
 
-import com.canoestudio.retrofuturemc.contents.AzaleaCreator;
-import com.canoestudio.retrofuturemc.contents.BlockCreator;
-import com.canoestudio.retrofuturemc.contents.LeafCreator;
-import com.canoestudio.retrofuturemc.contents.MossCreator;
+
+import com.canoestudio.retrofuturemc.contents.*;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVine;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVinePlant;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.BigDripleaf;
@@ -41,4 +39,5 @@ public class ModBlocks {
     public static final Block Flowering_Azalea = new AzaleaCreator("Flowering_Azalea");
 
     public static final Block PINK_PETALS = new PinkPetals("Pink_Petals");
+    public static final Block MOSS_CARPET = new MossCarpetCreator("Moss_Carpet");
 }

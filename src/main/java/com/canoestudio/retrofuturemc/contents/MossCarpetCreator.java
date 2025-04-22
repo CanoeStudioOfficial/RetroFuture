@@ -1,0 +1,97 @@
+package com.canoestudio.retrofuturemc.contents;
+
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
+
+public class MossCarpetCreator extends Block {
+    protected static final AxisAlignedBB CARPET_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
+
+    public MossCarpetCreator(String name) {
+        super(Material.PLANTS);
+        setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
+        setRegistryName(name.toLowerCase());
+        setHardness(0.1F);
+        setSoundType(SoundType.PLANT);
+        setCreativeTab(CREATIVE_TABS);
+
+        ModBlocks.BLOCKS.add(this);
+        ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return CARPET_AABB;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+        return super.canPlaceBlockAt(worldIn, pos) && this.canBlockStay(worldIn, pos);
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        this.checkForDrop(worldIn, pos, state);
+    }
+
+    private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
+        if (!this.canBlockStay(worldIn, pos)) {
+            this.dropBlockAsItem(worldIn, pos, state, 0);
+            worldIn.setBlockToAir(pos);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean canBlockStay(World worldIn, BlockPos pos) {
+        return !worldIn.isAirBlock(pos.down());
+    }
+
+    @Override
+    public int getFlammability(IBlockAccess world, BlockPos pos, net.minecraft.util.EnumFacing face) {
+        return 20; // 与原版植物相同的可燃性
+    }
+
+    @Override
+    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, net.minecraft.util.EnumFacing face) {
+        return 60; // 与原版植物相同的燃烧速度
+    }
+
+    @Override
+    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
+        // 苔藓地毯有轻微的减速效果
+        if (!worldIn.isRemote) {
+            entityIn.motionX *= 0.95D;
+            entityIn.motionZ *= 0.95D;
+        }
+    }
+}
