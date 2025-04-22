@@ -1,10 +1,10 @@
 package com.canoestudio.retrofuturemc.contents.blocks.CaveVine;
 
 
-import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;

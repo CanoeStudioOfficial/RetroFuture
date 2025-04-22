@@ -1,5 +1,6 @@
 package com.canoestudio.retrofuturemc.contents.items.pinkpetals;
 
+import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.blocks.pinkpetals.PinkPetals;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
@@ -10,7 +11,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,18 +23,13 @@ import javax.annotation.Nonnull;
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class PinkpetalsItem extends Item {
-    private Block block; // 关联的方块（例如 PinkPetals 方块）
 
     public PinkpetalsItem(String name) {
         setRegistryName(name);
         setTranslationKey(name + "_" + Tags.MOD_ID);
         setCreativeTab(CREATIVE_TABS);
-        ModItems.ITEMS.add(this);
-    }
 
-    // 设置关联的方块（例如在注册时调用）
-    public void setBlock(Block block) {
-        this.block = block;
+        ModItems.ITEMS.add(this);
     }
 
     // 右键点击逻辑（修复 NullPointerException）
@@ -63,7 +62,7 @@ public class PinkpetalsItem extends Item {
         BlockPos placeBlockPos = clickPos.offset(facing);
 
         // 升级落英
-        if (clickBlock == this.block) {
+        if (clickBlock == ModBlocks.PINK_PETALS) {
             placeBlockPos = clickPos;
             int level = clickBlockState.getValue(PinkPetals.LEVEL);
 
@@ -78,29 +77,24 @@ public class PinkpetalsItem extends Item {
         }
 
         // 首次放置落英（可吞噬草或雪）
-        if (clickBlock == Blocks.TALLGRASS || (clickBlock == Blocks.SNOW_LAYER && clickBlock.getMetaFromState(clickBlockState) == 0)) {
-            placeBlockPos = clickPos;
-        }
+        if (downBlockIsGrass(world, placeBlockPos)) {
+            IBlockState oldBlockState = world.getBlockState(placeBlockPos);
+            Block oldBlock = oldBlockState.getBlock();
 
-        if (canPlaceOn(world, placeBlockPos)) {
-            IBlockState oldState = world.getBlockState(placeBlockPos);
-            Block oldBlock = oldState.getBlock();
-
-            // 禁止放在液体中
-            if (oldBlock instanceof net.minecraft.block.BlockLiquid) {
+            // 不能放液体里
+            if (oldBlock instanceof net.minecraft.block.BlockLiquid)
                 return EnumActionResult.FAIL;
-            }
 
-            // 允许放在空气、草或单层雪上
-            if (oldBlock == Blocks.AIR || oldBlock == Blocks.TALLGRASS || (oldBlock == Blocks.SNOW_LAYER && oldBlock.getMetaFromState(oldState) == 0)) {
-                EnumFacing playerFacing = player.getHorizontalFacing();
-                int axis = getAxisFromFacing(playerFacing);
+            // 防止吞方块 ; 可以吞草丛和一层的雪
+            if (oldBlock == Blocks.AIR || oldBlock == Blocks.TALLGRASS || (oldBlock == Blocks.SNOW_LAYER && oldBlock.getMetaFromState(oldBlockState) == 0)) {
+                /*获取玩家朝向*/facing = player.getHorizontalFacing();
 
-                IBlockState newState = this.block.getDefaultState()
-                        .withProperty(PinkPetals.AXIS, axis);
+                int axis = getAxisFromFacing(facing);//面朝北方
 
-                placeBlock(world, placeBlockPos, newState);
-                stack.shrink(1);
+                IBlockState state = ModBlocks.PINK_PETALS.getDefaultState().withProperty(PinkPetals.AXIS, axis);
+
+                /*放置方块*/placeBlock(world, placeBlockPos, state);
+                /*消耗一个物品*/player.getHeldItem(hand).shrink(1);
                 return EnumActionResult.SUCCESS;
             }
         }
@@ -128,6 +122,20 @@ public class PinkpetalsItem extends Item {
             case WEST:  return 4;
             default:    return 1; // NORTH
         }
+    }
+
+    public static boolean downBlockIsGrass(World world, BlockPos pos) {
+        IBlockState blockState = world.getBlockState(pos.down());
+        Block block = blockState.getBlock();
+
+        return  block == Blocks.DIRT ||
+                block == Blocks.GRASS ||
+                block == Blocks.MYCELIUM ||
+                block == Blocks.FARMLAND ||
+                (
+                        block.getRegistryName().toString().contains("moss") &&
+                                block.isFullCube(blockState)
+                );
     }
 
     // 放置方块并播放音效

@@ -2,7 +2,6 @@ package com.canoestudio.retrofuturemc.contents.items;
 
 import com.canoestudio.retrofuturemc.contents.BerryCreator;
 import com.canoestudio.retrofuturemc.contents.items.pinkpetals.PinkpetalsItem;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 

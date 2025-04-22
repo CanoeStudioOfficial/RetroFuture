@@ -40,5 +40,5 @@ public class ModBlocks {
     public static final Block Azalea = new AzaleaCreator("Azalea");
     public static final Block Flowering_Azalea = new AzaleaCreator("Flowering_Azalea");
 
-    public static final Block PINK_PETALS = new PinkPetals("pink_petals");
+    public static final Block PINK_PETALS = new PinkPetals("Pink_Petals");
 }

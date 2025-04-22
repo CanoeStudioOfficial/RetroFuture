@@ -1,35 +1,32 @@
 package com.canoestudio.retrofuturemc.contents.blocks.pinkpetals;
 
 
-import java.util.Map;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Arrays;
-
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
+import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.contents.items.pinkpetals.PinkpetalsItem;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import com.canoestudio.retrofuturemc.sounds.pinkpetals.SoundPinkPetals;
-
-
-
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarpet;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.world.World;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //落英类
 public class PinkPetals extends BlockCarpet {
@@ -52,11 +49,6 @@ public class PinkPetals extends BlockCarpet {
                 .withProperty(AXIS, 1)
                 .withProperty(LEVEL, 1)
                 .withProperty(COLOR, EnumDyeColor.PINK));
-    }
-
-    private Item item;
-    protected void setItem(Item item) {
-        this.item = item;
     }
 
     //落英属性
@@ -170,11 +162,11 @@ public class PinkPetals extends BlockCarpet {
     //获取物品&掉落物
     @Override
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
-        return new ItemStack(this.item);
+        return new ItemStack(ModItems.PINK_PETALS);
     }
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess access, BlockPos pos, IBlockState state, int fortune) {
-        drops.add(new ItemStack(this.item, state.getValue(LEVEL)));
+        drops.add(new ItemStack(ModItems.PINK_PETALS, state.getValue(LEVEL)));
     }
 
     //方块更新

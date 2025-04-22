@@ -1,11 +1,11 @@
 package com.canoestudio.retrofuturemc.contents;
 
-import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVine;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVinePlant;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;

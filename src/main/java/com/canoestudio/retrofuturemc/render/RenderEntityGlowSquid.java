@@ -1,10 +1,10 @@
 package com.canoestudio.retrofuturemc.render;
 
 
-import net.minecraft.util.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.*;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderSquid;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderEntityGlowSquid extends RenderSquid
 {

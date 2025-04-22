@@ -1,9 +1,9 @@
 package com.canoestudio.retrofuturemc.contents;
 
-import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.SmallDripleaf;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import net.minecraft.block.*;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;

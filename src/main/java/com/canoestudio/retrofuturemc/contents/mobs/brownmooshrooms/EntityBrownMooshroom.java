@@ -1,7 +1,6 @@
 package com.canoestudio.retrofuturemc.contents.mobs.brownmooshrooms;
 
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.init.Blocks;

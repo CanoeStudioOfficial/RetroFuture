@@ -1,8 +1,8 @@
 package com.canoestudio.retrofuturemc.sounds.pinkpetals;
 
 import net.minecraft.block.SoundType;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 public class SoundPinkPetals extends SoundType {
     public SoundPinkPetals() {
