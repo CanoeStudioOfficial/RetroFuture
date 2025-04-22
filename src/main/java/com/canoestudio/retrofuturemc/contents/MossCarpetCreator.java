@@ -32,8 +32,6 @@ public class MossCarpetCreator extends Block implements IGrowable {
         setSoundType(SoundType.PLANT);
         setCreativeTab(CREATIVE_TABS);
 
-
-
         ModBlocks.BLOCKS.add(this);
         ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
     }

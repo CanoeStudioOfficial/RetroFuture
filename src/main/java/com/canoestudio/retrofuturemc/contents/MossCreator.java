@@ -122,6 +122,7 @@ public class MossCreator extends Block implements IGrowable {
         if(canPlantMoss(world, newPos))
         {
             IBlockState stateAzalea = ModBlocks.Azalea.getDefaultState();
+            IBlockState stateCarpet = ModBlocks.MOSS_CARPET.getDefaultState();
             IBlockState stateGrass = Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS);
             float chance = random.nextFloat();
 
@@ -149,6 +150,11 @@ public class MossCreator extends Block implements IGrowable {
             if(chance <= 0.0715 && Blocks.TALLGRASS.canBlockStay(world, newPos, stateGrass) && !flag2)
             {
                 ((SmallDripleaf)ModBlocks.SMALL_DRIPLEAF).placeAt(world, newPos, EnumFacing.byHorizontalIndex(random.nextInt(4)), 3);
+                return;
+            }
+            if(chance <= 0.15625 && world.isAirBlock(newPos) && !flag1 && !flag2)
+            {
+                world.setBlockState(newPos, stateCarpet, 3);
                 return;
             }
             if(chance <= 0.3125 && Blocks.TALLGRASS.canBlockStay(world, newPos, stateGrass) && !flag2)
