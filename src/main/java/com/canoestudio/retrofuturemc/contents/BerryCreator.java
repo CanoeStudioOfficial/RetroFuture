@@ -1,6 +1,6 @@
 package com.canoestudio.retrofuturemc.contents;
 
-import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
+import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVine;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVinePlant;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;

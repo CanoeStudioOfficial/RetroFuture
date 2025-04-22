@@ -1,4 +1,4 @@
-package com.canoestudio.retrofuturemc.Sound;
+package com.canoestudio.retrofuturemc.sounds;
 
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;

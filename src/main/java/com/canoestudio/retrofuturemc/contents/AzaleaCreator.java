@@ -1,6 +1,6 @@
 package com.canoestudio.retrofuturemc.contents;
 
-import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
+import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.world.gen.WorldGenBigAzaleaTree;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
@@ -28,7 +28,7 @@ import java.util.Random;
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class AzaleaCreator extends Block implements IGrowable, IPlantable {
-    public static final SoundType AZALEA = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_AZALEA_BREAK, ModSoundHandler.BLOCK_AZALEA_STEP, ModSoundHandler.BLOCK_AZALEA_PLACE, com.canoestudio.retrofuturemc.Sound.ModSoundHandler.BLOCK_AZALEA_HIT, ModSoundHandler.BLOCK_AZALEA_FALL);
+    public static final SoundType AZALEA = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_AZALEA_BREAK, ModSoundHandler.BLOCK_AZALEA_STEP, ModSoundHandler.BLOCK_AZALEA_PLACE, ModSoundHandler.BLOCK_AZALEA_HIT, ModSoundHandler.BLOCK_AZALEA_FALL);
 
     public AzaleaCreator(String name) {
         super(Material.PLANTS, Material.PLANTS.getMaterialMapColor());

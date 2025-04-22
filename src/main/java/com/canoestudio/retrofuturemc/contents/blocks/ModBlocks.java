@@ -9,6 +9,7 @@ import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVinePlant;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.BigDripleaf;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.DripleafStem;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.SmallDripleaf;
+import com.canoestudio.retrofuturemc.contents.blocks.pinkpetals.PinkPetals;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.init.Blocks;
@@ -38,4 +39,6 @@ public class ModBlocks {
 
     public static final Block Azalea = new AzaleaCreator("Azalea");
     public static final Block Flowering_Azalea = new AzaleaCreator("Flowering_Azalea");
+
+    public static final Block PINK_PETALS = new PinkPetals("pink_petals");
 }

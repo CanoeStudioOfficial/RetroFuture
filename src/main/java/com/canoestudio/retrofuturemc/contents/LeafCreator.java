@@ -1,6 +1,6 @@
 package com.canoestudio.retrofuturemc.contents;
 
-import com.canoestudio.retrofuturemc.Sound.ModSoundHandler;
+import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import net.minecraft.block.BlockLeaves;
