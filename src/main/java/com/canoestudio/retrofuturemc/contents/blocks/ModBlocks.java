@@ -40,4 +40,6 @@ public class ModBlocks {
 
     public static final Block PINK_PETALS = new PinkPetals("Pink_Petals");
     public static final Block MOSS_CARPET = new MossCarpetCreator("Moss_Carpet");
+
+    public static final Block normalLog = new LogCreator("rubber_log", 2, 0, "axe");
 }

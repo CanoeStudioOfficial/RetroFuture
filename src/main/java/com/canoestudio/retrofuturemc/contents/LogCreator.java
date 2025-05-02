@@ -13,9 +13,9 @@ import net.minecraft.world.IBlockAccess;
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
 public class LogCreator extends BlockLog {
-    private final boolean flammable; // 控制是否可燃烧
+    private final boolean flammable;
 
-    // 主构造方法（可自定义燃烧属性）
+    // 构造方法（仅保留核心参数）
     public LogCreator(String name, int hardness, int harvestlevel, String toolclass, boolean flammable) {
         this.flammable = flammable;
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
@@ -30,31 +30,15 @@ public class LogCreator extends BlockLog {
         ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
     }
 
-    // 简化构造方法（默认可燃烧）
+    // 最简构造方法（默认可燃烧）
     public LogCreator(String name, int hardness, int harvestlevel, String toolclass) {
         this(name, hardness, harvestlevel, toolclass, true);
     }
 
-    // ===== 方块状态方法 =====
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, LOG_AXIS);
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(LOG_AXIS, EnumAxis.values()[meta]);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return ((EnumAxis) state.getValue(LOG_AXIS)).ordinal();
-    }
-
-    // ===== 原木特性方法 =====
+    // ===== 保留原版逻辑 =====
     @Override
     public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return true;
+        return true; // 默认支撑所有树叶
     }
 
     @Override
@@ -62,7 +46,7 @@ public class LogCreator extends BlockLog {
         return true;
     }
 
-    // ===== 燃烧控制方法 =====
+    // ===== 燃烧控制 =====
     @Override
     public int getFlammability(IBlockAccess world, BlockPos pos, net.minecraft.util.EnumFacing face) {
         return flammable ? 5 : 0;
@@ -73,8 +57,19 @@ public class LogCreator extends BlockLog {
         return flammable ? 5 : 0;
     }
 
+    // ===== 方块状态管理 =====
     @Override
-    public boolean isFlammable(IBlockAccess world, BlockPos pos, net.minecraft.util.EnumFacing face) {
-        return flammable;
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, LOG_AXIS);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(LOG_AXIS, EnumAxis.values()[meta]);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return ((EnumAxis) state.getValue(LOG_AXIS)).ordinal();
     }
 }
