@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "retrofuturemc:block/pale_oak_log_top",
+    "side": "retrofuturemc:block/pale_oak_log"
+  }
+}
