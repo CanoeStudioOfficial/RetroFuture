@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "check_decay=false,decayable=false": { "model": "retrofuturemc:pale_oak_leaves" },
+    "check_decay=true,decayable=false": { "model": "retrofuturemc:pale_oak_leaves" },
+    "check_decay=false,decayable=true": { "model": "retrofuturemc:pale_oak_leaves" },
+    "check_decay=true,decayable=true": { "model": "retrofuturemc:pale_oak_leaves" }
+  }
+}
