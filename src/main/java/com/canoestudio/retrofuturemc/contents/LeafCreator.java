@@ -24,20 +24,89 @@ import java.util.List;
 
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
+/**
+ * 自定义树叶方块类，支持可配置的燃烧特性
+ */
 public class LeafCreator extends BlockLeaves {
-    public static final SoundType AZALEA_LEAVES = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_AZALEA_LEAVES_BREAK, ModSoundHandler.BLOCK_AZALEA_LEAVES_STEP, ModSoundHandler.BLOCK_AZALEA_PLACE, ModSoundHandler.BLOCK_AZALEA_LEAVES_HIT, ModSoundHandler.BLOCK_AZALEA_LEAVES_FALL);
+    // 自定义树叶音效
+    public static final SoundType AZALEA_LEAVES = new SoundType(
+            1.0F, 1.0F,
+            ModSoundHandler.BLOCK_AZALEA_LEAVES_BREAK,
+            ModSoundHandler.BLOCK_AZALEA_LEAVES_STEP,
+            ModSoundHandler.BLOCK_AZALEA_PLACE,
+            ModSoundHandler.BLOCK_AZALEA_LEAVES_HIT,
+            ModSoundHandler.BLOCK_AZALEA_LEAVES_FALL
+    );
 
+    private final boolean flammable;
+
+    /**
+     * 创建默认的可燃树叶
+     * @param name 树叶注册名称
+     */
     public LeafCreator(String name) {
+        this(name, true); // 默认设置为可燃
+    }
+
+    /**
+     * 完整构造函数
+     * @param name 树叶注册名称
+     * @param flammable 是否可燃
+     */
+    public LeafCreator(String name, boolean flammable) {
         super();
+        this.flammable = flammable;
+
+        // 基础属性设置
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name.toLowerCase());
         setCreativeTab(CREATIVE_TABS);
         setSoundType(AZALEA_LEAVES);
 
-        this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+        // 初始化方块状态
+        setDefaultState(blockState.getBaseState()
+                .withProperty(CHECK_DECAY, true)
+                .withProperty(DECAYABLE, true));
 
+        // 注册方块和对应的物品
         ModBlocks.BLOCKS.add(this);
-        ModBlocks.BLOCKITEMS.add(new ItemBlock(this).setRegistryName(name.toLowerCase()));
+        ModBlocks.BLOCKITEMS.add(new ItemBlock(this)
+                .setRegistryName(name.toLowerCase()));
+    }
+
+    /* 可燃性相关方法 */
+    @Override
+    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return flammable ? 60 : 0; // 与原版树叶相同的可燃性值
+    }
+
+    @Override
+    public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return flammable ? 30 : 0; // 与原版树叶相同的火焰传播速度
+    }
+
+    @Override
+    public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return flammable;
+    }
+
+    /* 渲染相关方法 */
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return Blocks.LEAVES.getRenderLayer();
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return Blocks.LEAVES.isOpaqueCube(state);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world,
+                                        BlockPos pos, EnumFacing side) {
+        return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
     }
 
     @Override
@@ -45,44 +114,19 @@ public class LeafCreator extends BlockLeaves {
         return true;
     }
 
+    /* 方块状态管理 */
     @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
-    {
-        return Blocks.LEAVES.getRenderLayer();
-    }
-
-    @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return Blocks.LEAVES.isOpaqueCube(state);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
-        return Blocks.LEAVES.shouldSideBeRendered(state, world, pos, side);
-    }
-
-    protected BlockStateContainer createBlockState()
-    {
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
     }
 
-    public int getMetaFromState(IBlockState state)
-    {
-        int i;
-
-        if(state.getValue(DECAYABLE))
-            i = state.getValue(CHECK_DECAY)? 3 : 2;
-        else
-            i = state.getValue(CHECK_DECAY)? 1 : 0;
-
-        return i;
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return (state.getValue(DECAYABLE) ? 2 : 0) +
+                (state.getValue(CHECK_DECAY) ? 1 : 0);
     }
 
-
+    /* 树叶类型和剪切行为 */
     @Override
     public BlockPlanks.EnumType getWoodType(int meta) {
         return BlockPlanks.EnumType.OAK;
@@ -90,7 +134,8 @@ public class LeafCreator extends BlockLeaves {
 
     @Nonnull
     @Override
-    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world,
+                                     BlockPos pos, int fortune) {
         return NonNullList.withSize(1, new ItemStack(this));
     }
 }

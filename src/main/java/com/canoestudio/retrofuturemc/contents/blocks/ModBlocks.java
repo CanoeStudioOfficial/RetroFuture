@@ -42,7 +42,7 @@ public class ModBlocks {
     public static final Block MOSS_CARPET = new MossCarpetCreator("Moss_Carpet");
 
     public static final Block PLAE_OAK_LOG = new LogCreator("Pale_Oak_Log", 2, 0, "axe");
-    public static final Block PLAE_OAK_LEAVES = new LeafCreator("Plae_Oak_Leaves");
-
+    public static final Block PLAE_OAK_LEAVES = new LeafCreator("Pale_Oak_Leaves");
+    public static final Block PLAE_OAK_PLANKS = new PlanksCreator("Pale_Oak_Planks",2, 0, "axe");
 
 }
