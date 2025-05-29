@@ -1,0 +1,22 @@
+{
+  "stop": {
+    "category": "master",
+    "subtitle": "subtitles.stop",
+    "sounds": [
+      {
+        "name": "retrofuturemc:stop",
+        "stream": false
+      }
+    ]
+  },
+  "use": {
+    "category": "master",
+    "subtitle": "subtitles.use",
+    "sounds": [
+      {
+        "name": "retrofuturemc:use",
+        "stream": false
+      }
+    ]
+  }
+}
