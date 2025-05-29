@@ -15,5 +15,5 @@ public class ModItems {
 
     public static final ItemFood Glow_Berries = new BerryCreator("Glow_Berries", 4, 0.4f);
     public static final PinkpetalsItem PINK_PETALS = new PinkpetalsItem("Pink_Petals");
-    public static final Item SPYGLASS = new ItemSpyglass('Spyglass');
+    public static final Item SPYGLASS = new ItemSpyglass("Spyglass");
 }

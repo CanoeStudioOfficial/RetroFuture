@@ -2,6 +2,7 @@ package com.canoestudio.retrofuturemc;
 
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import com.canoestudio.retrofuturemc.utils.proxy.CommonProxy;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,6 +22,13 @@ public class RetroFuturemc {
 
     @SidedProxy(clientSide = "com.canoestudio.retrofuturemc.utils.proxy.ClientProxy", serverSide = "com.canoestudio.retrofuturemc.utils.proxy.CommonProxy")
     public static CommonProxy proxy;
+    public static ResourceLocation loc(String name) {
+        return new ResourceLocation(Tags.MOD_ID, name.toLowerCase());
+    }
+
+    public static String locStr(String name) {
+        return loc(name).toString();
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

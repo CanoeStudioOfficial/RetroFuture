@@ -7,11 +7,14 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import static com.canoestudio.retrofuturemc.sounds.ModSoundHandler.SOUNDS;
 
 public class ModSoundEvent extends SoundEvent {
     public ModSoundEvent(String path) {
         super(new ResourceLocation(Tags.MOD_ID, path));
-        ModSoundHandler.SOUNDS.add(this);
+        SOUNDS.add(this);
         setRegistryName(path);
     }
 
@@ -29,4 +32,5 @@ public class ModSoundEvent extends SoundEvent {
         //播放音效
         world.playSound(null, pos, new SoundEvent(new ResourceLocation(modId, soundName)), SoundCategory.BLOCKS, a, b);
     }
+
 }

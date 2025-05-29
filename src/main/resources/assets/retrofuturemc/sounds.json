@@ -9,6 +9,50 @@
       }
     ]
   },
+  "item.spyglass.stop_using": {
+    "sounds": [
+      {
+        "name": "deeperdepths:item/spyglass/stop",
+        "volume": 0.5
+      },
+      {
+        "name": "deeperdepths:item/spyglass/stop",
+        "pitch": 0.8,
+        "volume": 0.5
+      },
+      {
+        "name": "deeperdepths:item/spyglass/stop",
+        "pitch": 0.9,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.deeperdepths.item.spyglass.stop_using"
+  },
+  "item.spyglass.use": {
+    "sounds": [
+      {
+        "name": "deeperdepths:item/spyglass/use",
+        "pitch": 1.15,
+        "volume": 0.5
+      },
+      {
+        "name": "deeperdepths:item/spyglass/use",
+        "pitch": 1.33,
+        "volume": 0.5
+      },
+      {
+        "name": "deeperdepths:item/spyglass/use",
+        "pitch": 1.4,
+        "volume": 0.5
+      },
+      {
+        "name": "deeperdepths:item/spyglass/use",
+        "pitch": 1.55,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.deeperdepths.item.spyglass.use"
+  },
   "use": {
     "category": "master",
     "subtitle": "subtitles.use",
