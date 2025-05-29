@@ -1,10 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-        "1": "retrofuturemc:items/spyglass_model -red",
-        "particle": "retrofuturemc:items/spyglass_model -red"
-    },
-
+		"1": "spyglass_model",
+		"particle": "spyglass_model"
+	},
 	"elements": [
 		{
 			"from": [7, 8.5, 7],
@@ -33,18 +32,7 @@
 	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [85.74, 0.04, 6.75],
-			"translation": [-2.25, 1, -4.25]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [90, 0, 0],
-			"translation": [0, 1, 2.25]
-		},
-		"firstperson_righthand": {
-			"translation": [6.25, -6.5, 0]
-		},
-		"firstperson_lefthand": {
-			"translation": [8, -6.75, 0]
+			"translation": [0, -2, 0]
 		},
 		"ground": {
 			"rotation": [90, 0, 0]
