@@ -2,6 +2,7 @@ package com.canoestudio.retrofuturemc.contents.items.spyglass;
 
 
 
+import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import com.canoestudio.retrofuturemc.sounds.ModSoundEvent;
 import com.canoestudio.retrofuturemc.sounds.RetroFuturemcSoundEvents;
@@ -16,6 +17,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
+
 public class ItemSpyglass extends Item {
 
     public ItemSpyglass(String name)
@@ -23,6 +26,10 @@ public class ItemSpyglass extends Item {
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
         setRegistryName(name.toLowerCase());
         setMaxStackSize(1);
+
+        setCreativeTab(CREATIVE_TABS);
+
+        ModItems.ITEMS.add(this);
     }
 
     @Override
