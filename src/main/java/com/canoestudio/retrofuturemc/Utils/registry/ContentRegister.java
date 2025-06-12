@@ -1,4 +1,4 @@
-package com.canoestudio.retrofuturemc.utils.registry;
+package com.canoestudio.retrofuturemc.Utils.registry;
 
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;

@@ -1,7 +1,9 @@
-package com.canoestudio.retrofuturemc.utils.proxy;
+package com.canoestudio.retrofuturemc.Utils.proxy;
 
+import com.canoestudio.retrofuturemc.contents.items.spyglass.SpyglassHandler;
 import com.canoestudio.retrofuturemc.contents.mobs.brownmooshrooms.EntityBrownMooshroom;
 import com.canoestudio.retrofuturemc.contents.mobs.brownmooshrooms.RenderBrownMooshroom;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -12,6 +14,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         RenderingRegistry.registerEntityRenderingHandler(EntityBrownMooshroom.class, RenderBrownMooshroom::new);
+        MinecraftForge.EVENT_BUS.register(SpyglassHandler.class);
     }
 
     @Override
@@ -23,4 +26,5 @@ public class ClientProxy extends CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
     }
+
 }
