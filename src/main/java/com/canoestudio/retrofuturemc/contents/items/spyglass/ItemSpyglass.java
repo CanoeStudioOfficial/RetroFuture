@@ -2,6 +2,7 @@ package com.canoestudio.retrofuturemc.contents.items.spyglass;
 
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,27 +30,26 @@ public class ItemSpyglass extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
-
-        if (!world.isRemote) {
-            return super.onItemRightClick(world, player, hand);
-        }
-
-        // 客户端处理
-        if (player.isHandActive() && player.getActiveHand() == hand) {
-            player.stopActiveHand();
-            SpyglassHandler.updateItemUsage(false, hand);
-        } else {
-            player.setActiveHand(hand);
+        if (world.isRemote) {
             SpyglassHandler.updateItemUsage(true, hand);
         }
+        player.setActiveHand(hand);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    }
 
-        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entityLiving, int timeLeft) {
+        if (entityLiving instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entityLiving;
+            if (world.isRemote) {
+                SpyglassHandler.updateItemUsage(false, null);
+            }
+        }
     }
 
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
         return 72000;
     }
-
-
 }
+

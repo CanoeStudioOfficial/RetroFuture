@@ -22,7 +22,7 @@ public class SpyglassHandler {
     public static final float FOV_MULTIPLIER = 0.1F;
     private static final int ANIM_DURATION = 500;
     private static final int OVERLAY_SIZE = 270;
-    private static final ResourceLocation OVERLAY = new ResourceLocation(Tags.MOD_ID, "textures/spyglass_scope.png");
+    private static final ResourceLocation OVERLAY = new ResourceLocation(Tags.MOD_ID, "textures/gui/spyglass_scope.png");
 
     protected static OverlayState overlayState = OverlayState.CLOSED;
     public static long animStartTime = -1;
