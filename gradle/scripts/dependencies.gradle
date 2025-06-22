@@ -25,7 +25,11 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
-    maven { url 'https://jitpack.io' }
+    maven {
+        name = "Fluidlogged API"
+        url 'https://jitpack.io'
+    }
+
 
     mavenLocal() // Must be last for caching to work
 }
@@ -53,7 +57,7 @@ dependencies {
     // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
     // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/
 
-    rfg.deobf 'com.github.jbredwards:fluidlogged-api:1.12.2-Latest-SNAPSHOT'
+    implementation 'com.github.jbredwards:fluidlogged-api:1.12.2-Latest-SNAPSHOT'
 
     // Common dependency types (configuration):
     // implementation = dependency available at both compile time and runtime

@@ -4,6 +4,7 @@ package com.canoestudio.retrofuturemc.contents.blocks;
 import com.canoestudio.retrofuturemc.contents.*;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVine;
 import com.canoestudio.retrofuturemc.contents.blocks.CaveVine.CaveVinePlant;
+import com.canoestudio.retrofuturemc.contents.blocks.HangingRoots.HangingRoots;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.BigDripleaf;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.DripleafStem;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.SmallDripleaf;
@@ -45,4 +46,5 @@ public class ModBlocks {
     public static final Block PLAE_OAK_LEAVES = new LeafCreator("Pale_Oak_Leaves");
     public static final Block PLAE_OAK_PLANKS = new PlanksCreator("Pale_Oak_Planks",2, 0, "axe");
 
+    public static final Block HangingRoots = new HangingRoots("Hanging_Roots");
 }
