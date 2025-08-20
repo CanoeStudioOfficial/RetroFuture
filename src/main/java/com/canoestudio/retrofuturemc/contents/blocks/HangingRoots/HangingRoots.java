@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +28,6 @@ public class HangingRoots extends Block implements IFluidloggable, IPlantable {
     public HangingRoots(String name) {
         super(Material.PLANTS);
         setSoundType(SoundType.PLANT);
-        setCreativeTab(CreativeTabs.DECORATIONS);
         setHardness(0.0F);
         setRegistryName(name);
         setTranslationKey(Tags.MOD_ID + "." + name.toLowerCase());
