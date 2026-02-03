@@ -8,7 +8,6 @@ import com.canoestudio.retrofuturemc.contents.blocks.HangingRoots.HangingRoots;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.BigDripleaf;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.DripleafStem;
 import com.canoestudio.retrofuturemc.contents.blocks.dripLeaf.SmallDripleaf;
-import com.canoestudio.retrofuturemc.contents.blocks.pinkpetals.PinkPetals;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.init.Blocks;
