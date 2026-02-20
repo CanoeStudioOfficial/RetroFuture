@@ -1,4 +1,4 @@
-package com.canoestudio.retrofuturemc.Utils.proxy;
+package com.canoestudio.retrofuturemc.utils.proxy;
 
 import com.canoestudio.retrofuturemc.contents.items.spyglass.SpyglassHandler;
 import com.canoestudio.retrofuturemc.contents.mobs.brownmooshrooms.EntityBrownMooshroom;

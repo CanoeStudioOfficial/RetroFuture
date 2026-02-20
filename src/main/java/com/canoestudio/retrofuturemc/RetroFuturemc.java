@@ -1,6 +1,6 @@
 package com.canoestudio.retrofuturemc;
 
-import com.canoestudio.retrofuturemc.Utils.proxy.CommonProxy;
+import com.canoestudio.retrofuturemc.utils.proxy.CommonProxy;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 
 import net.minecraftforge.fml.common.Mod;
