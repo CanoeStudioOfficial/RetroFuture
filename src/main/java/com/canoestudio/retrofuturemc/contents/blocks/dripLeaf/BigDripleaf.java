@@ -4,9 +4,6 @@ import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
 import com.canoestudio.retrofuturemc.sounds.ModSoundHandler;
-import git.jbredwards.fluidlogged_api.api.block.BlockWaterloggedPlant;
-import git.jbredwards.fluidlogged_api.api.util.FluidState;
-import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -30,7 +27,7 @@ import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
-public class BigDripleaf extends BlockWaterloggedPlant implements IGrowable {
+public class BigDripleaf extends BlockBush implements IGrowable {
     public static final String name = "Big_Dripleaf";
     public static final SoundType DRIPLEAF = new SoundType(1.0F, 1.0F, ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, ModSoundHandler.BLOCK_BIG_DRIPLEAF_STEP, ModSoundHandler.BLOCK_BIG_DRIPLEAF_PLACE, ModSoundHandler.BLOCK_BIG_DRIPLEAF_HIT, ModSoundHandler.BLOCK_BIG_DRIPLEAF_FALL);
 
@@ -186,10 +183,6 @@ public class BigDripleaf extends BlockWaterloggedPlant implements IGrowable {
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
-        if (fluidState.isFluidloggable() && isFluidloggable(getDefaultState(), worldIn, pos, fluidState)) {
-            return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
-        }
         return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
     }
 
