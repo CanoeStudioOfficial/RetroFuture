@@ -3,6 +3,9 @@ package com.canoestudio.retrofuturemc.contents.blocks.dripLeaf;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import git.jbredwards.fluidlogged_api.api.block.BlockWaterloggedPlant;
+import git.jbredwards.fluidlogged_api.api.util.FluidState;
+import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -31,7 +34,7 @@ import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
-public class SmallDripleaf extends BlockBush implements IGrowable, IShearable {
+public class SmallDripleaf extends BlockWaterloggedPlant implements IGrowable, IShearable {
     public static final String name = "Small_Dripleaf";
 
     public static final PropertyEnum<BlockDoublePlant.EnumBlockHalf> HALF = BlockDoublePlant.HALF;
@@ -58,6 +61,10 @@ public class SmallDripleaf extends BlockBush implements IGrowable, IShearable {
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
+        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
+        if (fluidState.isFluidloggable() && isFluidloggable(getDefaultState(), worldIn, pos, fluidState)) {
+            return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
+        }
         return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
     }
 

@@ -3,7 +3,9 @@ package com.canoestudio.retrofuturemc.contents.blocks.dripLeaf;
 
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
-import net.minecraft.block.BlockBush;
+import git.jbredwards.fluidlogged_api.api.block.BlockWaterloggedPlant;
+import git.jbredwards.fluidlogged_api.api.util.FluidState;
+import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -26,7 +28,7 @@ import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
-public class DripleafStem extends BlockBush implements IGrowable
+public class DripleafStem extends BlockWaterloggedPlant implements IGrowable
 {
     public static final String name = "Big_Dripleaf_Stem";
     public static final PropertyEnum<EnumFacing> FACING = BlockHorizontal.FACING;
@@ -50,6 +52,14 @@ public class DripleafStem extends BlockBush implements IGrowable
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
+        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
+        if (fluidState.isFluidloggable() && isFluidloggable(getDefaultState(), worldIn, pos, fluidState)) {
+            IBlockState soil = worldIn.getBlockState(pos.down());
+            boolean flag1 = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+            boolean flag2 = soil.getBlock() == this;
+            boolean flag3 = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
+            return (flag1 || flag2) && flag3;
+        }
         IBlockState soil = worldIn.getBlockState(pos.down());
 
         boolean flag1 = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
@@ -72,8 +82,6 @@ public class DripleafStem extends BlockBush implements IGrowable
 
         return flag1 && flag2;
     }
-
-    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) { return false; }
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune) { return Item.getItemFromBlock(ModBlocks.BIG_DRIPLEAF); }
 

@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 public class RetroFuturemc {
     public static final Logger LOGGER = LogManager.getLogger(Tags.MOD_NAME);
 
-    @SidedProxy(clientSide = "com.canoestudio.retrofuturemc.Utils.proxy.ClientProxy", serverSide = "com.canoestudio.retrofuturemc.Utils.proxy.CommonProxy")
+    @SidedProxy(clientSide = "com.canoestudio.retrofuturemc.utils.proxy.ClientProxy", serverSide = "com.canoestudio.retrofuturemc.utils.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
