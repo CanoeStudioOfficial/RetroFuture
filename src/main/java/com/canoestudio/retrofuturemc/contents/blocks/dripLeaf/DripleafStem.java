@@ -61,13 +61,9 @@ public class DripleafStem extends BlockWaterloggedPlant implements IGrowable
             return (flag1 || flag2) && flag3;
         }
         IBlockState soil = worldIn.getBlockState(pos.down());
-
         boolean flag1 = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
-
         boolean flag2 = soil.getBlock() == this;
-
         boolean flag3 = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
-
         return (flag1 || flag2) && flag3;
     }
 
