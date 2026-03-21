@@ -74,12 +74,8 @@ public class BerryCreator extends ItemFood implements IPlantable {
                 return EnumActionResult.SUCCESS;
             }
 
-            return EnumActionResult.FAIL;
         }
-        else
-        {
-            return EnumActionResult.FAIL;
-        }
+        return EnumActionResult.FAIL;
     }
 
     @Override
