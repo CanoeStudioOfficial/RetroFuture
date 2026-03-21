@@ -61,11 +61,11 @@ public class SmallDripleaf extends BlockWaterloggedPlant implements IGrowable, I
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        boolean canSustain = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
-        IBlockState above = worldIn.getBlockState(pos.up());
-        boolean airAbove = above.getBlock() == Blocks.AIR || above.getBlock() == ModBlocks.DRIPLEAF_STEM;
-        return canSustain && airAbove;
+        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
+        if (fluidState.isFluidloggable() && isFluidloggable(getDefaultState(), worldIn, pos, fluidState)) {
+            return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
+        }
+        return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
     }
 
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) { return false; }
