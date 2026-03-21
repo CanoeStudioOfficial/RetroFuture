@@ -61,10 +61,6 @@ public class SmallDripleaf extends BlockWaterloggedPlant implements IGrowable, I
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
-        if (fluidState.isFluidloggable() && isFluidloggable(getDefaultState(), worldIn, pos, fluidState)) {
-            return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
-        }
         return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
     }
 
