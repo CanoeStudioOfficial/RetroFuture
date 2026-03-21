@@ -3,10 +3,15 @@ package com.canoestudio.retrofuturemc.contents.blocks.dripLeaf;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
+import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
+import git.jbredwards.fluidlogged_api.api.util.FluidState;
+import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
+import git.jbredwards.fluidlogged_api.api.world.IWorldProvider;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,21 +22,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
-public class SmallDripleaf extends BlockBush implements IGrowable, IShearable {
+public class SmallDripleaf extends BlockBush implements IGrowable, IShearable, IFluidloggable {
     public static final String name = "Small_Dripleaf";
 
     public static final PropertyEnum<BlockDoublePlant.EnumBlockHalf> HALF = BlockDoublePlant.HALF;
@@ -58,10 +64,59 @@ public class SmallDripleaf extends BlockBush implements IGrowable, IShearable {
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up());
+        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
+        boolean canPlaceFluid = fluidState.isEmpty() || isFluidValid(getDefaultState(), worldIn, pos, fluidState.getFluid());
+        return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up()) && canPlaceFluid;
     }
 
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) { return false; }
+
+    @Override
+    public boolean isFluidValid(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Fluid fluid) {
+        return FluidloggedUtils.isCompatibleFluid(FluidRegistry.WATER, fluid);
+    }
+
+    @Override
+    public boolean isFluidloggable(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull FluidState fluidState) {
+        if (fluidState.isEmpty()) return true;
+        return isFluidValid(state, IWorldProvider.getWorld(world), pos, fluidState.getFluid())
+                && (fluidState.isSource() || fluidState.getActualHeight(world, pos) >= 1 && FluidloggedUtils.canCreateSource(fluidState.getState(), IWorldProvider.getWorld(world), pos));
+    }
+
+    @Nonnull
+    @Override
+    public EnumActionResult onFluidFill(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState here, @Nonnull FluidState newFluid, int blockFlags) {
+        if (!newFluid.isSource()) {
+            if (newFluid.getActualHeight(world, pos) < 1) {
+                world.playEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, getStateId(here));
+                dropBlockAsItem(world, pos, here, 0);
+                world.setBlockState(pos, newFluid.getState(), blockFlags);
+                return EnumActionResult.SUCCESS;
+            }
+            else if (FluidloggedUtils.canCreateSource(newFluid.getState(), world, pos)
+                    && FluidloggedUtils.setFluidState(world, pos, here, newFluid.toSource(), false)) {
+                return EnumActionResult.SUCCESS;
+            }
+        }
+        return EnumActionResult.PASS;
+    }
+
+    @Nonnull
+    @Override
+    public EnumActionResult onFluidDrain(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState here, int blockFlags) {
+        world.playEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, getStateId(here));
+        dropBlockAsItem(world, pos, here, 0);
+        world.setBlockState(pos, Blocks.AIR.getDefaultState(), blockFlags);
+        return EnumActionResult.SUCCESS;
+    }
+
+    @Override
+    public boolean canFluidFlow(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState here, @Nonnull EnumFacing side) {
+        return here.getBlockFaceShape(world, pos, side) != BlockFaceShape.SOLID;
+    }
+
+    @Override
+    public boolean overrideApplyDefaultsSetting() { return true; }
 
     protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
     {
