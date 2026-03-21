@@ -63,7 +63,8 @@ public class SmallDripleaf extends BlockWaterloggedPlant implements IGrowable, I
     {
         IBlockState soil = worldIn.getBlockState(pos.down());
         boolean canSustain = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
-        boolean airAbove = worldIn.isAirBlock(pos.up());
+        IBlockState above = worldIn.getBlockState(pos.up());
+        boolean airAbove = above.getBlock() == Blocks.AIR || above.getBlock() == ModBlocks.DRIPLEAF_STEM;
         return canSustain && airAbove;
     }
 

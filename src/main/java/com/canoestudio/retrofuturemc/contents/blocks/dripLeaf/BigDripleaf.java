@@ -187,8 +187,11 @@ public class BigDripleaf extends BlockWaterloggedPlant implements IGrowable {
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
         IBlockState soil = worldIn.getBlockState(pos.down());
-        boolean canSustain = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) || soil.getBlock() == ModBlocks.DRIPLEAF_STEM;
-        boolean airAbove = worldIn.isAirBlock(pos.up());
+        boolean canSustain = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) 
+                || soil.getBlock() == ModBlocks.DRIPLEAF_STEM
+                || soil.getBlock() == ModBlocks.BIG_DRIPLEAF;
+        IBlockState above = worldIn.getBlockState(pos.up());
+        boolean airAbove = above.getBlock() == Blocks.AIR || above.getBlock() == ModBlocks.DRIPLEAF_STEM;
         return canSustain && airAbove;
     }
 
