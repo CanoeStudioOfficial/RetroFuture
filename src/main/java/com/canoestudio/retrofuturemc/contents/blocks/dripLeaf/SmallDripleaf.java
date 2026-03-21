@@ -3,7 +3,6 @@ package com.canoestudio.retrofuturemc.contents.blocks.dripLeaf;
 import com.canoestudio.retrofuturemc.contents.blocks.ModBlocks;
 import com.canoestudio.retrofuturemc.contents.items.ModItems;
 import com.canoestudio.retrofuturemc.retrofuturemc.Tags;
-import git.jbredwards.fluidlogged_api.api.block.BlockWaterloggedPlant;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -27,13 +26,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fluids.FluidRegistry;
 
 import java.util.Random;
 
 import static com.canoestudio.retrofuturemc.contents.tab.CreativeTab.CREATIVE_TABS;
 
-public class SmallDripleaf extends BlockWaterloggedPlant implements IGrowable, IShearable {
+public class SmallDripleaf extends BlockBush implements IGrowable, IShearable {
     public static final String name = "Small_Dripleaf";
 
     public static final PropertyEnum<BlockDoublePlant.EnumBlockHalf> HALF = BlockDoublePlant.HALF;
