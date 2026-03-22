@@ -54,11 +54,43 @@ public class DripleafStem extends BlockBush implements IGrowable, IFluidloggable
         setCreativeTab(CREATIVE_TABS);
         setSoundType(BigDripleaf.DRIPLEAF);
         setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
+        this.setTickRandomly(true);
 
         ModBlocks.BLOCKS.add(this);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) { return FULL_BLOCK_AABB; }
+
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+        if (!worldIn.isRemote)
+        {
+            if (!this.canBlockStay(worldIn, pos, state))
+            {
+                this.dropBlockAsItem(worldIn, pos, state, 0);
+                worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+            }
+            else if (!hasDripleafAbove(worldIn, pos))
+            {
+                worldIn.setBlockState(pos, ModBlocks.BIG_DRIPLEAF.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+            }
+        }
+    }
+
+    private boolean hasDripleafAbove(World world, BlockPos pos)
+    {
+        IBlockState upState = world.getBlockState(pos.up());
+        return upState.getBlock() == ModBlocks.DRIPLEAF_STEM || upState.getBlock() == ModBlocks.BIG_DRIPLEAF;
+    }
+
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        if (!worldIn.isRemote)
+        {
+            worldIn.scheduleUpdate(pos, this, 1);
+        }
+    }
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
