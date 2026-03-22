@@ -17,8 +17,12 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -46,9 +50,6 @@ public class BigDripleaf extends BlockBush implements IGrowable, IFluidloggable 
     public static final PropertyEnum<EnumFacing> FACING = BlockHorizontal.FACING;
     public static final PropertyEnum<BigDripleaf.EnumTilt> TILT = PropertyEnum.<BigDripleaf.EnumTilt>create("tilt", BigDripleaf.EnumTilt.class);
 
-    public int tiltLevel;
-    public boolean playSound;
-
     public BigDripleaf() {
         super(Material.VINE);
 
@@ -63,8 +64,6 @@ public class BigDripleaf extends BlockBush implements IGrowable, IFluidloggable 
 
         setSoundType(BigDripleaf.DRIPLEAF);
 
-        this.tiltLevel = 0;
-        this.playSound = false;
         this.setTickRandomly(true);
 
         ModBlocks.BLOCKS.add(this);
@@ -90,98 +89,76 @@ public class BigDripleaf extends BlockBush implements IGrowable, IFluidloggable 
 
     public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
     {
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
-    {
-        if(playSound)
-        {
-            worldIn.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F, true);
-            playSound = false;
-        }
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        if(tiltLevel == 3)
+        EnumTilt tilt = state.getValue(TILT);
+        
+        if (tilt == EnumTilt.UNSTABLE)
         {
-            worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.NONE));
-        }
-
-        if(tiltLevel == 1)
-        {
-            worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.PARTIAL));
-            playSound = true;
-            checkReset(worldIn, pos);
-        }
-
-        if(tiltLevel == 2)
-        {
-            worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.FULL));
-            playSound = true;
-            tiltLevel = 3;
-            worldIn.scheduleUpdate(pos, this, 100);
-        }
-    }
-
-    public void checkReset(World worldIn, BlockPos pos)
-    {
-        AxisAlignedBB AABB = new AxisAlignedBB((double)pos.getX(), (double)(pos.getY() + 1), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 2), (double)(pos.getZ() + 1));
-
-        if (!worldIn.isRemote)
-        {
-            if(worldIn.getEntitiesWithinAABBExcludingEntity((Entity)null ,AABB).isEmpty() && worldIn.getBlockState(pos).getValue(TILT) == EnumTilt.PARTIAL)
+            if (!worldIn.isBlockPowered(pos))
             {
-                tiltLevel = 3;
+                worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.NONE), 2);
+            }
+        }
+        else if (tilt == EnumTilt.PARTIAL)
+        {
+            AxisAlignedBB checkAABB = new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1);
+            if (worldIn.getEntitiesWithinAABBExcludingEntity(null, checkAABB).isEmpty())
+            {
+                worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.NONE), 2);
+                worldIn.playSound(null, pos, ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F);
+            }
+            else
+            {
+                worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.FULL), 2);
+                worldIn.playSound(null, pos, ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F);
                 worldIn.scheduleUpdate(pos, this, 100);
+            }
+        }
+        else if (tilt == EnumTilt.FULL)
+        {
+            AxisAlignedBB checkAABB = new AxisAlignedBB(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1);
+            if (worldIn.getEntitiesWithinAABBExcludingEntity(null, checkAABB).isEmpty())
+            {
+                worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.NONE), 2);
+                worldIn.playSound(null, pos, ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F);
             }
         }
     }
 
     public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
+        if (worldIn.isRemote) return;
+        
         EnumTilt tilt = state.getValue(TILT);
 
-        AxisAlignedBB AABB = new AxisAlignedBB((double)pos.getX(), (double)(pos.getY() + 1), (double)pos.getZ(), (double)(pos.getX() + 1), (double)(pos.getY() + 2), (double)(pos.getZ() + 1));
-
-        if (!worldIn.isRemote)
+        if (tilt == EnumTilt.NONE)
         {
-            if(!worldIn.getEntitiesWithinAABBExcludingEntity((Entity)null ,AABB).isEmpty() && tilt != EnumTilt.UNSTABLE)
-            {
-                if(tilt == EnumTilt.NONE)
-                {
-                    tiltLevel = 1;
-                    worldIn.scheduleUpdate(pos, this, 20);
-                }
-
-                if(tilt == EnumTilt.PARTIAL)
-                {
-                    tiltLevel = 2;
-                    worldIn.scheduleUpdate(pos, this, 20);
-                }
-            }
+            worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.PARTIAL), 2);
+            worldIn.playSound(null, pos, ModSoundHandler.BLOCK_BIG_DRIPLEAF_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F);
+            worldIn.scheduleUpdate(pos, this, 10);
         }
-
     }
-
 
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         if (!worldIn.isRemote)
         {
-            boolean flag1 = worldIn.isBlockPowered(pos);
-            boolean flag2 = blockIn.getDefaultState().canProvidePower();
-            boolean flag3 = state.getValue(TILT) == EnumTilt.UNSTABLE;
+            boolean isPowered = worldIn.isBlockPowered(pos);
+            EnumTilt tilt = state.getValue(TILT);
 
-            if (flag1 || flag2)
+            if (isPowered)
             {
-                if (!flag3)
+                if (tilt != EnumTilt.UNSTABLE)
                 {
                     worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.UNSTABLE), 2);
                 }
-                if(!flag1)
+            }
+            else
+            {
+                if (tilt == EnumTilt.UNSTABLE)
                 {
                     worldIn.setBlockState(pos, state.withProperty(TILT, EnumTilt.NONE), 2);
                 }
@@ -192,16 +169,67 @@ public class BigDripleaf extends BlockBush implements IGrowable, IFluidloggable 
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
-        boolean canPlaceFluid = fluidState.isEmpty() || isFluidValid(getDefaultState(), worldIn, pos, fluidState.getFluid());
-        return super.canPlaceBlockAt(worldIn, pos) && worldIn.isAirBlock(pos.up()) && canPlaceFluid;
+        IBlockState downState = worldIn.getBlockState(pos.down());
+        Block downBlock = downState.getBlock();
+        
+        if (downBlock == ModBlocks.DRIPLEAF_STEM)
+        {
+            return true;
+        }
+        
+        if (downBlock == ModBlocks.BIG_DRIPLEAF && isTopDripleaf(worldIn, pos.down()))
+        {
+            return true;
+        }
+        
+        if (downBlock.canSustainPlant(downState, worldIn, pos.down(), EnumFacing.UP, this))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    private boolean isTopDripleaf(World world, BlockPos pos)
+    {
+        IBlockState state = world.getBlockState(pos);
+        if (state.getBlock() != ModBlocks.BIG_DRIPLEAF)
+        {
+            return false;
+        }
+        
+        IBlockState upState = world.getBlockState(pos.up());
+        return upState.getBlock() != ModBlocks.BIG_DRIPLEAF && upState.getBlock() != ModBlocks.DRIPLEAF_STEM;
     }
 
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
-        IBlockState soil = worldIn.getBlockState(pos.down());
+        IBlockState downState = worldIn.getBlockState(pos.down());
+        Block downBlock = downState.getBlock();
 
-        return soil.getBlock() == ModBlocks.DRIPLEAF_STEM || super.canBlockStay(worldIn, pos, state);
+        if (downBlock == ModBlocks.DRIPLEAF_STEM)
+        {
+            return true;
+        }
+        
+        if (downBlock == ModBlocks.BIG_DRIPLEAF)
+        {
+            return true;
+        }
+        
+        return downBlock.canSustainPlant(downState, worldIn, pos.down(), EnumFacing.UP, this);
+    }
+
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    {
+        super.onBlockAdded(worldIn, pos, state);
+        
+        IBlockState downState = worldIn.getBlockState(pos.down());
+        if (downState.getBlock() == ModBlocks.BIG_DRIPLEAF)
+        {
+            EnumFacing facing = state.getValue(FACING);
+            worldIn.setBlockState(pos.down(), ModBlocks.DRIPLEAF_STEM.getDefaultState().withProperty(FACING, facing), 2);
+        }
     }
 
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) { return false; }
@@ -253,6 +281,74 @@ public class BigDripleaf extends BlockBush implements IGrowable, IFluidloggable 
     @Override
     public boolean overrideApplyDefaultsSetting() { return true; }
 
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+        ItemStack heldItem = playerIn.getHeldItem(hand);
+        
+        if (heldItem.getItem() == Items.DYE && heldItem.getMetadata() == 15)
+        {
+            if (canGrowWithBonemeal(worldIn, pos, state))
+            {
+                if (!worldIn.isRemote)
+                {
+                    growWithBonemeal(worldIn, pos, state);
+                    if (!playerIn.capabilities.isCreativeMode)
+                    {
+                        heldItem.shrink(1);
+                    }
+                }
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    private boolean canGrowWithBonemeal(World world, BlockPos pos, IBlockState state)
+    {
+        BlockPos topPos = findTopPosition(world, pos);
+        IBlockState topState = world.getBlockState(topPos);
+        
+        if (topState.getBlock() != ModBlocks.BIG_DRIPLEAF)
+        {
+            return false;
+        }
+        
+        BlockPos aboveTop = topPos.up();
+        IBlockState aboveState = world.getBlockState(aboveTop);
+        
+        return aboveState.getBlock().isReplaceable(world, aboveTop) || aboveState.getBlock() == Blocks.AIR;
+    }
+
+    private BlockPos findTopPosition(World world, BlockPos pos)
+    {
+        BlockPos checkPos = pos;
+        while (true)
+        {
+            IBlockState upState = world.getBlockState(checkPos.up());
+            if (upState.getBlock() == ModBlocks.BIG_DRIPLEAF || upState.getBlock() == ModBlocks.DRIPLEAF_STEM)
+            {
+                checkPos = checkPos.up();
+            }
+            else
+            {
+                break;
+            }
+        }
+        return checkPos;
+    }
+
+    private void growWithBonemeal(World world, BlockPos pos, IBlockState state)
+    {
+        BlockPos topPos = findTopPosition(world, pos);
+        IBlockState topState = world.getBlockState(topPos);
+        EnumFacing facing = topState.getValue(FACING);
+        
+        world.setBlockState(topPos, ModBlocks.DRIPLEAF_STEM.getDefaultState().withProperty(FACING, facing), 2);
+        world.setBlockState(topPos.up(), this.getDefaultState().withProperty(FACING, facing), 3);
+    }
+
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
@@ -289,20 +385,26 @@ public class BigDripleaf extends BlockBush implements IGrowable, IFluidloggable 
     }
 
     @Override
-    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) { return true; }
+    public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) { 
+        return canGrowWithBonemeal(worldIn, pos, state); 
+    }
 
     @Override
-    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) { return true; }
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) { 
+        return true; 
+    }
 
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
-        EnumFacing facing = state.getValue(FACING);
-
-        if(worldIn.getBlockState(pos.up()).getBlock() == Blocks.AIR)
+        if (canGrowWithBonemeal(worldIn, pos, state))
         {
-            worldIn.setBlockState(pos, ModBlocks.DRIPLEAF_STEM.getDefaultState().withProperty(FACING, facing), 2);
-            worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(FACING, facing), 3);
+            growWithBonemeal(worldIn, pos, state);
         }
+    }
+
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) 
+    { 
+        return Item.getItemFromBlock(this); 
     }
 
     public static enum EnumTilt implements IStringSerializable

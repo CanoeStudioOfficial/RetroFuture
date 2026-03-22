@@ -7,6 +7,7 @@ import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 import git.jbredwards.fluidlogged_api.api.util.FluidState;
 import git.jbredwards.fluidlogged_api.api.util.FluidloggedUtils;
 import git.jbredwards.fluidlogged_api.api.world.IWorldProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.IGrowable;
@@ -61,30 +62,43 @@ public class DripleafStem extends BlockBush implements IGrowable, IFluidloggable
 
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {
-        IBlockState soil = worldIn.getBlockState(pos.down());
-
-        boolean flag1 = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
-
-        boolean flag2 = soil.getBlock() == this;
-
-        boolean flag3 = worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos);
-
-        FluidState fluidState = FluidloggedUtils.getFluidState(worldIn, pos);
-        boolean canPlaceFluid = fluidState.isEmpty() || isFluidValid(getDefaultState(), worldIn, pos, fluidState.getFluid());
-
-        return (flag1 || flag2) && flag3 && canPlaceFluid;
+        IBlockState downState = worldIn.getBlockState(pos.down());
+        Block downBlock = downState.getBlock();
+        
+        if (downBlock == ModBlocks.DRIPLEAF_STEM)
+        {
+            return true;
+        }
+        
+        if (downBlock == ModBlocks.BIG_DRIPLEAF)
+        {
+            return true;
+        }
+        
+        if (downBlock.canSustainPlant(downState, worldIn, pos.down(), EnumFacing.UP, this))
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
     {
-        IBlockState top = worldIn.getBlockState(pos.up());
-        boolean flag1 = top.getBlock() == this || top.getBlock() == ModBlocks.BIG_DRIPLEAF;
+        IBlockState downState = worldIn.getBlockState(pos.down());
+        Block downBlock = downState.getBlock();
 
-        IBlockState soil = worldIn.getBlockState(pos.down());
-        boolean flag2 = soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this)
-                || soil.getBlock() == this;
-
-        return flag1 && flag2;
+        if (downBlock == ModBlocks.DRIPLEAF_STEM)
+        {
+            return true;
+        }
+        
+        if (downBlock == ModBlocks.BIG_DRIPLEAF)
+        {
+            return true;
+        }
+        
+        return downBlock.canSustainPlant(downState, worldIn, pos.down(), EnumFacing.UP, this);
     }
 
     public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) { return false; }
@@ -138,7 +152,6 @@ public class DripleafStem extends BlockBush implements IGrowable, IFluidloggable
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune) { return Item.getItemFromBlock(ModBlocks.BIG_DRIPLEAF); }
 
-    @Deprecated // Forge: Use more sensitive version below: getPickBlock
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) { return new ItemStack(ModBlocks.BIG_DRIPLEAF); }
 
     @Override
@@ -149,17 +162,39 @@ public class DripleafStem extends BlockBush implements IGrowable, IFluidloggable
 
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
     {
-        EnumFacing facing = state.getValue(FACING);
+        BlockPos topPos = findTopPosition(worldIn, pos);
+        IBlockState topState = worldIn.getBlockState(topPos);
+        EnumFacing facing = topState.getValue(FACING);
+        
+        BlockPos aboveTop = topPos.up();
+        IBlockState aboveState = worldIn.getBlockState(aboveTop);
+        
+        if (aboveState.getBlock().isReplaceable(worldIn, aboveTop) || aboveState.getBlock() == Blocks.AIR)
+        {
+            if (topState.getBlock() == ModBlocks.BIG_DRIPLEAF)
+            {
+                worldIn.setBlockState(topPos, this.getDefaultState().withProperty(FACING, facing), 2);
+            }
+            worldIn.setBlockState(aboveTop, ModBlocks.BIG_DRIPLEAF.getDefaultState().withProperty(FACING, facing), 3);
+        }
+    }
 
-        if(worldIn.getBlockState(pos.up()).getBlock() == this)
+    private BlockPos findTopPosition(World world, BlockPos pos)
+    {
+        BlockPos checkPos = pos;
+        while (true)
         {
-            this.grow(worldIn, rand, pos.up(), state);
+            IBlockState upState = world.getBlockState(checkPos.up());
+            if (upState.getBlock() == ModBlocks.DRIPLEAF_STEM || upState.getBlock() == ModBlocks.BIG_DRIPLEAF)
+            {
+                checkPos = checkPos.up();
+            }
+            else
+            {
+                break;
+            }
         }
-        else if(worldIn.getBlockState(pos.up()).getBlock() == ModBlocks.BIG_DRIPLEAF)
-        {
-            worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(FACING, facing), 2);
-            worldIn.setBlockState(pos.up(2), ModBlocks.BIG_DRIPLEAF.getDefaultState().withProperty(FACING, facing), 3);
-        }
+        return checkPos;
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
