@@ -48,7 +48,7 @@ String interpolate(String value) {
 }
 
 void assertProperty(String propertyName) {
-    def property = property(propertyName)
+    def property = findProperty(propertyName)
     if (property == null) {
         throw new GradleException("Property ${propertyName} is not defined!")
     }
@@ -67,7 +67,7 @@ void assertSubProperties(String propertyName, String... subPropertyNames) {
 }
 
 void setDefaultProperty(String propertyName, boolean warn, defaultValue) {
-    def property = property(propertyName)
+    def property = findProperty(propertyName)
     def exists = true
     if (property == null) {
         exists = false
@@ -81,7 +81,7 @@ void setDefaultProperty(String propertyName, boolean warn, defaultValue) {
         }
     }
     if (!exists) {
-        project.setProperty(propertyName, defaultValue.toString())
+        project.ext.set(propertyName, defaultValue.toString())
     }
 }
 

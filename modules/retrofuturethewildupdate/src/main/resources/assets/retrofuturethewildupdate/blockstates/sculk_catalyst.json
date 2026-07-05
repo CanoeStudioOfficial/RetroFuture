@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "bloom=false": { "model": "retrofuturethewildupdate:sculk_catalyst" },
+    "bloom=true": { "model": "retrofuturethewildupdate:sculk_catalyst_bloom" }
+  }
+}

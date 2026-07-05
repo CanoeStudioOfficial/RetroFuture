@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=west": {
+      "model": "retrofuturemc:big_dripleaf_stem",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "retrofuturemc:big_dripleaf_stem"
+    },
+    "facing=north": {
+      "model": "retrofuturemc:big_dripleaf_stem",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "retrofuturemc:big_dripleaf_stem",
+      "y": 270
+    }
+  }
+}

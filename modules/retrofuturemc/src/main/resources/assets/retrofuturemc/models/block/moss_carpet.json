@@ -1,0 +1,7 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "particle": "retrofuturemc:blocks/moss_block",
+    "wool": "retrofuturemc:blocks/moss_block"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": { "wall": "retrofuturemc:blocks/polished_deepslate" }
+}

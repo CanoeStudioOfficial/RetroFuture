@@ -1,0 +1,8 @@
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation rfg.deobf('curse.maven:fluidlogged-api-485654:7581579')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

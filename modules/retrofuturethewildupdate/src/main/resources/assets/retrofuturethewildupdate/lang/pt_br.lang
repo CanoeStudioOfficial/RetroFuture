@@ -1,0 +1,5 @@
+item.retrofuturethewildupdate.warden_egg.name=Spawn Warden
+entity.retrofuturethewildupdate.warden.name=Warden
+effect.darkness=Escuridão
+rtwu.config.general=Mecânicas Gerais
+rtwu.config.general.enableWardenSpawns=Ativar Spawn do Warden

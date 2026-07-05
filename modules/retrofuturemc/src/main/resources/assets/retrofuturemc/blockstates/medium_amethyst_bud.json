@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down": { "model": "retrofuturemc:medium_amethyst_bud", "x": 180 },
+    "facing=east": { "model": "retrofuturemc:medium_amethyst_bud", "x": 90, "y": 90 },
+    "facing=north": { "model": "retrofuturemc:medium_amethyst_bud", "x": 90 },
+    "facing=south": { "model": "retrofuturemc:medium_amethyst_bud", "x": 90, "y": 180 },
+    "facing=up": { "model": "retrofuturemc:medium_amethyst_bud" },
+    "facing=west": { "model": "retrofuturemc:medium_amethyst_bud", "x": 90, "y": 270 }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "retrofuturemc:hanging_roots"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{
+      "model": "retrofuturemc:hanging_roots",
+      "transform": "forge:default-block"
+    }]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "retrofuturethewildupdate:block/template_sculk_shrieker",
+  "textures": {
+    "bottom": "retrofuturethewildupdate:block/sculk_shrieker_bottom",
+    "inner_top": "retrofuturethewildupdate:block/sculk_shrieker_can_summon_inner_top",
+    "particle": "retrofuturethewildupdate:block/sculk_shrieker_bottom",
+    "side": "retrofuturethewildupdate:block/sculk_shrieker_side",
+    "top": "retrofuturethewildupdate:block/sculk_shrieker_top"
+  }
+}

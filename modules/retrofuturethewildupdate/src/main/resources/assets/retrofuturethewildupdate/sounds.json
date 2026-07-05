@@ -1,0 +1,62 @@
+{
+  "mob.warden.ambient": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/ambient_1",
+    "retrofuturethewildupdate:mob/warden/ambient_2",
+    "retrofuturethewildupdate:mob/warden/ambient_3",
+    "retrofuturethewildupdate:mob/warden/ambient_4",
+    "retrofuturethewildupdate:mob/warden/ambient_5",
+    "retrofuturethewildupdate:mob/warden/ambient_6"
+  ]},
+  "mob.warden.hurt": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/hurt_1",
+    "retrofuturethewildupdate:mob/warden/hurt_2",
+    "retrofuturethewildupdate:mob/warden/hurt_3",
+    "retrofuturethewildupdate:mob/warden/hurt_4"
+  ]},
+  "mob.warden.death": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/death_1",
+    "retrofuturethewildupdate:mob/warden/death_2"
+  ]},
+  "mob.warden.step": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/step_1",
+    "retrofuturethewildupdate:mob/warden/step_2"
+  ]},
+  "mob.warden.roar": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/warden_roar1"
+  ]},
+  "mob.warden.sniff": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/sniff_1",
+    "retrofuturethewildupdate:mob/warden/sniff_2",
+    "retrofuturethewildupdate:mob/warden/sniff_3",
+    "retrofuturethewildupdate:mob/warden/sniff_4"
+  ]},
+  "mob.warden.heartbeat": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/heartbeat_1",
+    "retrofuturethewildupdate:mob/warden/heartbeat_2",
+    "retrofuturethewildupdate:mob/warden/heartbeat_3",
+    "retrofuturethewildupdate:mob/warden/heartbeat_4"
+  ]},
+  "mob.warden.attack_impact": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/attack_impact_1",
+    "retrofuturethewildupdate:mob/warden/attack_impact_2"
+  ]},
+  "mob.warden.nearby_closer": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/nearby_closer_1",
+    "retrofuturethewildupdate:mob/warden/nearby_closer_2"
+  ]},
+  "mob.warden.sonic_boom": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/sonic_boom1",
+    "retrofuturethewildupdate:mob/warden/sonic_boom2"
+  ]},
+  "mob.warden.tendril": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/warden_tendril_clicks1",
+    "retrofuturethewildupdate:mob/warden/warden_tendril_clicks2",
+    "retrofuturethewildupdate:mob/warden/warden_tendril_clicks3"
+  ]},
+  "mob.warden.emerge": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/emerge"
+  ]},
+  "mob.warden.dig": { "sounds": [
+    "retrofuturethewildupdate:mob/warden/warden_dig"
+  ]}
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "retrofuturemc:block/template_lightning_rod",
+  "textures": {
+    "texture": "retrofuturemc:blocks/lightning_rod"
+  }
+}

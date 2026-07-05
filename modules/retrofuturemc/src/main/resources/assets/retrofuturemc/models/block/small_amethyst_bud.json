@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "retrofuturemc:blocks/small_amethyst_bud"
+  }
+}

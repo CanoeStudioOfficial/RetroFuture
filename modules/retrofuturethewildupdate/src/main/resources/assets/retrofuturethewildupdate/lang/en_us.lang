@@ -1,0 +1,10 @@
+item.retrofuturethewildupdate.warden_egg.name=Spawn Warden
+tile.retrofuturethewildupdate.sculk.name=Sculk
+tile.retrofuturethewildupdate.sculk_vein.name=Sculk Vein
+tile.retrofuturethewildupdate.sculk_sensor.name=Sculk Sensor
+tile.retrofuturethewildupdate.sculk_shrieker.name=Sculk Shrieker
+tile.retrofuturethewildupdate.sculk_catalyst.name=Sculk Catalyst
+entity.retrofuturethewildupdate.warden.name=Warden
+effect.darkness=Darkness
+rtwu.config.general=General Mechanics
+rtwu.config.general.enableWardenSpawns=Enable Warden Spawns

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "variant=default": { "model": "retrofuturemc:double_deepslate_tile_slab" }
+  }
+}

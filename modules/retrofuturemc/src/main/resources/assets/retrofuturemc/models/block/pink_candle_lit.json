@@ -1,0 +1,4 @@
+{
+  "parent": "retrofuturemc:block/template_candle",
+  "textures": { "all": "retrofuturemc:blocks/pink_candle_lit" }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "retrofuturemc:magenta_candle_cake"
+    },
+    "lit=true": {
+      "model": "retrofuturemc:magenta_candle_cake_lit"
+    }
+  }
+}

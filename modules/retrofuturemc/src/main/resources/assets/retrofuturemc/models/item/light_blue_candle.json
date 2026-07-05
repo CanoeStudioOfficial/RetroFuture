@@ -1,0 +1,4 @@
+{
+  "parent": "item/generated",
+  "textures": { "layer0": "retrofuturemc:items/light_blue_candle" }
+}
